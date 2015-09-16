@@ -6,7 +6,7 @@
 #include "net.h"
 #include "init.h"
 #include "auxpow.h"
-#include "namecoin.h"
+#include "611.h"
 #include "cryptopp/sha.h"
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -32,8 +32,9 @@ unsigned int nTransactionsUpdated = 0;
 map<COutPoint, CInPoint> mapNextTx;
 
 CMapBlockIndex mapBlockIndex;
-uint256 hashGenesisBlock("0x000000000062b72c5e2ceb45fbc8587e807c155b0da735e6483dfba2f0a9c770");
-CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
+uint256 hashGenesisBlock("0x00000000bd61ac4b6a92d497274090be8448277beccb90c91e70d275243da1d2");
+// CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
+CBigNum bnProofOfWorkLimit(~uint256(0) >> 15);
 const int nInitialBlockThreshold = 120; // Regard blocks up until N-threshold as "initial download"
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -51,7 +52,7 @@ multimap<uint256, CBlock*> mapOrphanBlocksByPrev;
 map<uint256, CDataStream*> mapOrphanTransactions;
 multimap<uint256, CDataStream*> mapOrphanTransactionsByPrev;
 
-const std::string strMessageMagic = "Bitcoin Signed Message:\n";
+const std::string strMessageMagic = "611 Signed Message:\n";
 static const unsigned BLOCKFILE_MAX_SIZE = 0x7F000000;
 static const unsigned BLOCKFILE_CHUNK_SIZE = 16 * (1 << 20);
 
@@ -595,7 +596,7 @@ int CMerkleTx::GetBlocksToMaturity() const
 {
     if (!IsCoinBase())
         return 0;
-    return max(0, (COINBASE_MATURITY+20) - GetDepthInMainChain());
+    return max(0, (COINBASE_MATURITY+10) - GetDepthInMainChain());
 }
 
 
@@ -822,18 +823,26 @@ uint256 static GetOrphanRoot(const CBlock* pblock)
 
 int64 GetBlockValue(int nHeight, int64 nFees)
 {
-    int64 nSubsidy = 50 * COIN;
+    int64 nSubsidy = 0.611 * COIN;
 
+    if(nHeight < 2880)
+    {
+       nSubsidy = 61.1 * COIN;
+    }    
+    if(nHeight < 288)
+    {
+       nSubsidy = 611 * COIN;
+    }
     // Subsidy is cut in half every 4 years
-    nSubsidy >>= (nHeight / 210000);
+    // nSubsidy >>= (nHeight / 210000);
 
     return nSubsidy + nFees;
 }
 
 unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlock *pblock)
 {
-    const int64 nTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-    const int64 nTargetSpacing = 10 * 60;
+    const int64 nTargetTimespan = 4 * 60 * 60; // four hours
+    const int64 nTargetSpacing = 5 * 60; // five minutes
     const int64 nInterval = nTargetTimespan / nTargetSpacing;
 
     unsigned int nProofOfWorkLimit = bnProofOfWorkLimit.GetCompact();
@@ -848,7 +857,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
         // Special rules for testnet after 15 Mar 2014:
         if (fTestNet && pblock->nTime > 1394838000)
         {
-            // If the new block's timestamp is more than 2* 10 minutes
+            // If the new block's timestamp is more than 2* 5 minutes
             // then allow mining of a min-difficulty block.
             if (pblock->nTime - pindexLast->nTime > nTargetSpacing*2)
                 return nProofOfWorkLimit;
@@ -1687,7 +1696,7 @@ bool CBlock::CheckProofOfWork(int nHeight) const
    Each "object" touched in the DB may cause two locks (one read and one
    write lock).  Objects are transaction IDs and names.  Thus, count the
    total number of transaction IDs (tx themselves plus all distinct inputs).
-   In addition, each Namecoin transaction could touch at most one name,
+   In addition, each 611 transaction could touch at most one name,
    so add them as well.  */
 static bool
 CheckDbLockLimit(const CBlock& block, const CTransaction* extraTx = NULL)
@@ -1701,7 +1710,7 @@ CheckDbLockLimit(const CBlock& block, const CTransaction* extraTx = NULL)
     BOOST_FOREACH(const CTransaction& tx, vtx)
     {
         setTxIds.insert(tx.GetHash());
-        if (tx.nVersion == NAMECOIN_TX_VERSION)
+        if (tx.nVersion == SIXELEVEN_TX_VERSION)
             ++nNames;
 
         BOOST_FOREACH(const CTxIn& txIn, tx.vin)
@@ -1940,9 +1949,9 @@ CheckDiskSpace (uint64 nAdditionalBytes)
         strMiscWarning = strMessage;
         printf("*** %s\n", strMessage.c_str());
 #ifdef GUI
-        uiInterface.ThreadSafeMessageBox(strMessage, "Namecoin", wxOK | wxICON_EXCLAMATION);
+        uiInterface.ThreadSafeMessageBox(strMessage, "611", wxOK | wxICON_EXCLAMATION);
 #else
-        ThreadSafeMessageBox(strMessage, "Namecoin", wxOK | wxICON_EXCLAMATION);
+        ThreadSafeMessageBox(strMessage, "611", wxOK | wxICON_EXCLAMATION);
 #endif
 
         CreateThread(Shutdown, NULL);
@@ -2127,32 +2136,32 @@ bool LoadBlockIndex(bool fAllowNew)
             return false;
 
         // Genesis Block:
-        // CBlock(hash=000000000019d6, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=4a5e1e, nTime=1231006505, nBits=1d00ffff, nNonce=2083236893, vtx=1)
-        //   CTransaction(hash=4a5e1e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //     CTxIn(COutPoint(000000, -1), coinbase 04ffff001d0104455468652054696d65732030332f4a616e2f32303039204368616e63656c6c6f72206f6e206272696e6b206f66207365636f6e64206261696c6f757420666f722062616e6b73)
-        //     CTxOut(nValue=50.00000000, scriptPubKey=0x5F1DF16B2B704C8A578D0B)
-        //   vMerkleTree: 4a5e1e
+        // CBlock(hash=413a8fbe9b5fb31f2852, ver=1, hashPrevBlock=00000000000000000000, hashMerkleRoot=a315b72c99, nTime=1439667452, nBits=1c007fff, nNonce=0, vtx=1)
+        //   CTransaction(hash=a315b72c99, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+        //     CTxIn(COutPoint(0000000000, -1), coinbase 04ff7f001c0264024a546865207265616c6c7920676f6f64206472697665727320676f74207468652062756773206f6e2074686520736964652077696e646f77732e202d2d2057616c74657220526f6568726c)
+        //     CTxOut(nValue=611.00000000, scriptPubKey=4104d7309d1393e30954dbe9c5a760)
+        //   vMerkleTree: a315b72c99
 
         // Genesis block
-        const char* pszTimestamp = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";
+        const char* pszTimestamp = "The really good drivers got the bugs on the side windows. -- Walter Roehrl";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].nValue = 50 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
+        txNew.vout[0].nValue = 611 * COIN;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04d7309d1393e30954dbe9c5a760c26eeb4f7dbd449522499a436bae9fcac796cb1b270bb50a4b21dc61d55ba2ec3a5f796581bf2c51dfba91724f2ae2dc32c616") << OP_CHECKSIG;
         CBlock block;
         block.vtx.push_back(txNew);
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1231006505;
+        block.nTime    = 1439667444;
         block.nBits    = 0x1d00ffff;
-        block.nNonce   = 2083236893;
+        block.nNonce   = 199991039;
 
         if (fTestNet)
         {
-            block.nTime    = 1296688602;
+            block.nTime    = 1439642451;
             block.nBits    = 0x1d07fff8;
             block.nNonce   = 384568319;
         }
@@ -2163,7 +2172,7 @@ bool LoadBlockIndex(bool fAllowNew)
             printf("%s\n", block.GetHash().ToString().c_str());
             printf("%s\n", hashGenesisBlock.ToString().c_str());
             printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-            assert(block.hashMerkleRoot == uint256("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+            assert(block.hashMerkleRoot == uint256("0x863848920ce6640d2018145d64490ee387e19706547637a3818fb51a4ad49903"));
             block.print();
             assert(block.GetHash() == hashGenesisBlock);
         }

@@ -5,7 +5,7 @@
 #include "guiconstants.h"
 
 #include "../headers.h"
-#include "../namecoin.h"
+#include "../611.h"
 #include "ui_interface.h"
 
 #include <QTimer>
@@ -158,7 +158,7 @@ public:
                 else
                     fConfirmed = true;
 
-                if (tx.nVersion != NAMECOIN_TX_VERSION)
+                if (tx.nVersion != SIXELEVEN_TX_VERSION)
                     continue;
 
                 // name
@@ -448,11 +448,11 @@ QVariant NameTableModel::headerData(int section, Qt::Orientation orientation, in
             switch (section)
             {
             case Name:
-                return tr("Name registered using Namecoin.");
+                return tr("Name registered using 611.");
             case Value:
                 return tr("Data associated with the name.");
             case Address:
-                return tr("Namecoin address to which the name is registered.");
+                return tr("611 address to which the name is registered.");
             case ExpiresIn:
                 return tr("Number of blocks, after which the name will expire. Update name to renew it.");
             }

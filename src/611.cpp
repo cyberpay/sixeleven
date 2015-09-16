@@ -8,7 +8,7 @@
 #include "wallet.h"
 #include "init.h"
 #include "auxpow.h"
-#include "namecoin.h"
+#include "611.h"
 
 #include "bitcoinrpc.h"
 
@@ -25,7 +25,7 @@ extern int64 AmountFromValue(const Value& value);
 extern Object JSONRPCError(int code, const string& message);
 template<typename T> void ConvertTo(Value& value, bool fAllowNull=false);
 
-static const int BUG_WORKAROUND_BLOCK = 150000;         // Point of hard fork
+static const int BUG_WORKAROUND_BLOCK = 0;         // Point of hard fork
 
 std::map<vchType, uint256> mapMyNames;
 std::map<vchType, set<uint256> > mapNamePending;
@@ -44,10 +44,13 @@ extern bool IsConflictedTx (DatabaseSet& dbset, const CTransaction& tx, vchType&
 extern void rescanfornames();
 extern Value sendtoaddress(const Array& params, bool fHelp);
 
-const int NAME_COIN_GENESIS_EXTRA = 521;
-uint256 hashNameCoinGenesisBlock("000000000062b72c5e2ceb45fbc8587e807c155b0da735e6483dfba2f0a9c770");
+const int SIXELEVEN_COIN_GENESIS_EXTRA = 611;
+// uint256 hash611GenesisBlock("5046007a912dca485580fbc753ddd247e9bc189d357902813a5952937b3f342a");
+// uint256 hash611GenesisBlock("413a8fbe9b5fb31f28527f46818c5be332c258019874f92f6ae30fd1afb28081");
+// uint256 hash611GenesisBlock("64b1665d23ccc3dd3ae111c32e32f401578f4e590d946b8612f570487898c5a8");
+uint256 hash611GenesisBlock("7530c8ebcdd9d7944ac9de047240f0ac06707b0868cfe57f98831eeb2843d7ab");
 
-class CNamecoinHooks : public CHooks
+class C611Hooks : public CHooks
 {
 public:
     virtual bool IsStandard(const CScript& scriptPubKey);
@@ -80,7 +83,10 @@ public:
     virtual void MessageStart(char* pchMessageStart)
     {
         // Make the message start different
-        pchMessageStart[3] = 0xfe;
+        // pchMessageStart[3] = 0xfe;
+        // ohhh - sometimes 611 is 46609
+        pchMessageStart[2] = 0xb6;
+        pchMessageStart[3] = 0x11;
     }
     virtual bool IsMine(const CTransaction& tx);
     virtual bool IsMine(const CTransaction& tx, const CTxOut& txout, bool ignore_name_new = false);
@@ -105,12 +111,12 @@ public:
 
     string GetAlertPubkey1()
     {
-        return "04ba207043c1575208f08ea6ac27ed2aedd4f84e70b874db129acb08e6109a3bbb7c479ae22565973ebf0ac0391514511a22cb9345bdb772be20cfbd38be578b0c";
+        return "046e402e42167adacc1dbaa01fd272fc1ba56aa2a1f53e5b71e57d1ba67a1a1130316ec2a376130af0fb67173de0189865809664aceb2f5b3be874227792a58ddb";
     }
 
     string GetAlertPubkey2()
     {
-        return "04fc4366270096c7e40adb8c3fcfbff12335f3079e5e7905bce6b1539614ae057ee1e61a25abdae4a7a2368505db3541cd81636af3f7c7afe8591ebc85b2a1acdd";
+        return "04ae90ead1eef7380d9efd19e90b0dcc381b0427ed1f62a96a45b67fe864187a4c4c677b644d133058519dad57af15fc07e6fe376b831779536753573066b8f069";
     }
 };
 
@@ -175,14 +181,15 @@ string stringFromVch(const vector<unsigned char> &vch) {
     return res;
 }
 
-// Increase expiration to 36000 gradually starting at block 24000.
+// Names registered with 611 should be valid at least 365 days.
+// Increase expiration to 180000 gradually starting at block 18000.
 // Use for validation purposes and pass the chain height.
 int GetExpirationDepth(int nHeight) {
-    if (nHeight < 24000)
-        return 12000;
-    if (nHeight < 48000)
-        return nHeight - 12000;
-    return 36000;
+    if (nHeight < 18000)
+        return 18000;
+    if (nHeight < 198000)
+        return nHeight - 18000;
+    return 180000;
 }
 
 // For display purposes, pass the name height.
@@ -195,16 +202,26 @@ int GetDisplayExpirationDepth(int nHeight) {
 int64 GetNetworkFee(int nHeight)
 {
     // Speed up network fee decrease 4x starting at 24000
-    if (nHeight >= 24000)
-        nHeight += (nHeight - 24000) * 3;
-    if ((nHeight >> 13) >= 60)
-        return 0;
-    int64 nStart = 50 * COIN;
-    if (fTestNet)
-        nStart = 10 * CENT;
-    int64 nRes = nStart >> (nHeight >> 13);
-    nRes -= (nRes >> 14) * (nHeight % 8192);
-    return nRes;
+//     if (nHeight >= 24000)
+//         nHeight += (nHeight - 24000) * 3;
+//     if ((nHeight >> 13) >= 60)
+//         return 0;
+//     int64 nStart = 50 * COIN;
+//     if (fTestNet)
+//         nStart = 10 * CENT;
+//     int64 nRes = nStart >> (nHeight >> 13);
+//     nRes -= (nRes >> 14) * (nHeight % 8192);
+//     return nRes;
+    // the standard network (initial registration) fee is 61.1 cent
+       int64 nNetFee = 611 * CENT / 10;
+    // this fee is reduced significally for early adopters
+       if (nHeight <= 28800)
+           nNetFee = 611 * CENT / 100;
+       if (nHeight <= 2880)
+           nNetFee = 611 * CENT / 1000;
+       if (fTestNet)
+             nNetFee = 1 * CENT;
+       return nNetFee;
 }
 
 int GetTxPosHeight(const CNameIndex& txPos)
@@ -439,7 +456,7 @@ string SendMoneyWithInputTx(const CScript& scriptPubKey, int64 nValue, int64 nNe
     if (fAskFee && !uiInterface.ThreadSafeAskFee(nFeeRequired))
         return "ABORTED";
 #else
-    if (fAskFee && !ThreadSafeAskFee(nFeeRequired, "Namecoin", NULL))
+    if (fAskFee && !ThreadSafeAskFee(nFeeRequired, "611", NULL))
         return "ABORTED";
 #endif
 
@@ -538,7 +555,7 @@ Value sendtoname(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 2 || params.size() > 4)
         throw runtime_error(
-            "sendtoname <namecoinname> <amount> [comment] [comment-to]\n"
+            "sendtoname <611name> <amount> [comment] [comment-to]\n"
             "<amount> is a real and is rounded to the nearest 0.01"
             + HelpRequiringPassphrase());
 
@@ -554,7 +571,7 @@ Value sendtoname(const Array& params, bool fHelp)
 
     uint160 hash160;
     if (!AddressToHash160(strAddress, hash160))
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "No valid namecoin address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "No valid 611 address");
 
     // Amount
     int64 nAmount = AmountFromValue(params[1]);
@@ -1022,7 +1039,7 @@ Value name_firstupdate(const Array& params, bool fHelp)
       throw JSONRPCError(RPC_INVALID_PARAMETER, "the value is too long");
 
     CWalletTx wtx;
-    wtx.nVersion = NAMECOIN_TX_VERSION;
+    wtx.nVersion = SIXELEVEN_TX_VERSION;
 
     CRITICAL_BLOCK(cs_main)
     {
@@ -1054,7 +1071,7 @@ Value name_firstupdate(const Array& params, bool fHelp)
         bool isValid = AddressToHash160 (strAddress, hash160);
         if (!isValid)
             throw JSONRPCError (RPC_INVALID_ADDRESS_OR_KEY,
-                                "Invalid namecoin address");
+                                "Invalid 611 address");
         scriptPubKeyOrig.SetBitcoinAddress (strAddress);
     }
     else
@@ -1145,7 +1162,7 @@ Value name_update(const Array& params, bool fHelp)
       throw JSONRPCError(RPC_INVALID_PARAMETER, "the value is too long");
 
     CWalletTx wtx;
-    wtx.nVersion = NAMECOIN_TX_VERSION;
+    wtx.nVersion = SIXELEVEN_TX_VERSION;
     CScript scriptPubKeyOrig;
 
     if (params.size() == 3)
@@ -1154,7 +1171,7 @@ Value name_update(const Array& params, bool fHelp)
         uint160 hash160;
         bool isValid = AddressToHash160(strAddress, hash160);
         if (!isValid)
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid namecoin address");
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid 611 address");
         scriptPubKeyOrig.SetBitcoinAddress(strAddress);
     }
     else
@@ -1214,7 +1231,7 @@ Value name_new(const Array& params, bool fHelp)
     const vchType vchName = vchFromValue(params[0]);
 
     CWalletTx wtx;
-    wtx.nVersion = NAMECOIN_TX_VERSION;
+    wtx.nVersion = SIXELEVEN_TX_VERSION;
 
     const uint64 rand = GetRand((uint64)-1);
     const vchType vchRand = CBigNum(rand).getvch();
@@ -1361,11 +1378,11 @@ AddRawTxNameOperation (CTransaction& tx, const Object& obj)
   if (!IsValidBitcoinAddress (address))
     {
       std::ostringstream msg;
-      msg << "Invalid Namecoin address: " << address;
+      msg << "Invalid 611 address: " << address;
       throw JSONRPCError (RPC_INVALID_ADDRESS_OR_KEY, msg.str ());
     }
 
-  tx.nVersion = NAMECOIN_TX_VERSION;
+  tx.nVersion = SIXELEVEN_TX_VERSION;
 
   /* Find the transaction input to add.  */
 
@@ -1739,7 +1756,7 @@ bool CNameDB::ReconstructNameIndex()
 
             BOOST_FOREACH(CTransaction& tx, block.vtx)
             {
-                if (tx.nVersion != NAMECOIN_TX_VERSION)
+                if (tx.nVersion != SIXELEVEN_TX_VERSION)
                     continue;
 
                 vector<vector<unsigned char> > vvchArgs;
@@ -1758,13 +1775,13 @@ bool CNameDB::ReconstructNameIndex()
                     continue;
 
                 // Bug workaround
-                CDiskTxPos prevTxPos;
-                if (!postLibcoinFork (nHeight))
-                    if (!NameBugWorkaround(tx, txdb, &prevTxPos))
-                    {
-                        printf("NameBugWorkaround rejected tx %s at height %d (name %s)\n", tx.GetHash().ToString().c_str(), nHeight, stringFromVch(vchName).c_str());
-                        continue;
-                    }
+                // CDiskTxPos prevTxPos;
+                // if (!postLibcoinFork (nHeight))
+                //     if (!NameBugWorkaround(tx, txdb, &prevTxPos))
+                //     {
+                //         printf("NameBugWorkaround rejected tx %s at height %d (name %s)\n", tx.GetHash().ToString().c_str(), nHeight, stringFromVch(vchName).c_str());
+                //         continue;
+                //     }
 
                 vector<CNameIndex> vtxPos;
                 if (ExistsName(vchName))
@@ -1773,12 +1790,12 @@ bool CNameDB::ReconstructNameIndex()
                         return error("Rescanfornames() : failed to read from name DB");
                 }
 
-                if (op == OP_NAME_UPDATE && !postLibcoinFork (nHeight)
-                    && !CheckNameTxPos(vtxPos, prevTxPos))
-                {
-                    printf("NameBugWorkaround rejected tx %s at height %d (name %s), because previous tx was also rejected\n", tx.GetHash().ToString().c_str(), nHeight, stringFromVch(vchName).c_str());
-                    continue;
-                }
+                // if (op == OP_NAME_UPDATE && !postLibcoinFork (nHeight)
+                //     && !CheckNameTxPos(vtxPos, prevTxPos))
+                // {
+                //     printf("NameBugWorkaround rejected tx %s at height %d (name %s), because previous tx was also rejected\n", tx.GetHash().ToString().c_str(), nHeight, stringFromVch(vchName).c_str());
+                //     continue;
+                // }
 
                 CNameIndex txPos2;
                 txPos2.nHeight = nHeight;
@@ -1815,12 +1832,12 @@ CHooks* InitHook()
     mapCallTable.insert(make_pair("name_pending", &name_pending));
     mapCallTable.insert(make_pair("sendtoname", &sendtoname));
     mapCallTable.insert(make_pair("deletetransaction", &deletetransaction));
-    hashGenesisBlock = hashNameCoinGenesisBlock;
-    printf("Setup namecoin genesis block %s\n", hashGenesisBlock.GetHex().c_str());
-    return new CNamecoinHooks();
+    hashGenesisBlock = hash611GenesisBlock;
+    printf("Setup 611 genesis block %s\n", hashGenesisBlock.GetHex().c_str());
+    return new C611Hooks();
 }
 
-bool CNamecoinHooks::IsStandard(const CScript& scriptPubKey)
+bool C611Hooks::IsStandard(const CScript& scriptPubKey)
 {
     return true;
 }
@@ -1999,13 +2016,13 @@ int IndexOfNameOutput(const CTransaction& tx)
     return nOut;
 }
 
-void CNamecoinHooks::AddToWallet(CWalletTx& wtx)
+void C611Hooks::AddToWallet(CWalletTx& wtx)
 {
 }
 
-bool CNamecoinHooks::IsMine(const CTransaction& tx)
+bool C611Hooks::IsMine(const CTransaction& tx)
 {
-    if (tx.nVersion != NAMECOIN_TX_VERSION)
+    if (tx.nVersion != SIXELEVEN_TX_VERSION)
         return false;
 
     vector<vector<unsigned char> > vvch;
@@ -2031,9 +2048,9 @@ bool CNamecoinHooks::IsMine(const CTransaction& tx)
     return false;
 }
 
-bool CNamecoinHooks::IsMine(const CTransaction& tx, const CTxOut& txout, bool ignore_name_new /* = false*/)
+bool C611Hooks::IsMine(const CTransaction& tx, const CTxOut& txout, bool ignore_name_new /* = false*/)
 {
-    if (tx.nVersion != NAMECOIN_TX_VERSION)
+    if (tx.nVersion != SIXELEVEN_TX_VERSION)
         return false;
 
     vector<vector<unsigned char> > vvch;
@@ -2056,9 +2073,9 @@ bool CNamecoinHooks::IsMine(const CTransaction& tx, const CTxOut& txout, bool ig
 }
 
 bool
-CNamecoinHooks::AcceptToMemoryPool (DatabaseSet& dbset, const CTransaction& tx)
+C611Hooks::AcceptToMemoryPool (DatabaseSet& dbset, const CTransaction& tx)
 {
-    if (tx.nVersion != NAMECOIN_TX_VERSION)
+    if (tx.nVersion != SIXELEVEN_TX_VERSION)
         return true;
 
     if (tx.vout.size() < 1)
@@ -2091,9 +2108,9 @@ CNamecoinHooks::AcceptToMemoryPool (DatabaseSet& dbset, const CTransaction& tx)
     return true;
 }
 
-void CNamecoinHooks::RemoveFromMemoryPool(const CTransaction& tx)
+void C611Hooks::RemoveFromMemoryPool(const CTransaction& tx)
 {
-    if (tx.nVersion != NAMECOIN_TX_VERSION)
+    if (tx.nVersion != SIXELEVEN_TX_VERSION)
         return;
 
     if (tx.vout.size() < 1)
@@ -2128,7 +2145,7 @@ int CheckTransactionAtRelativeDepth(CBlockIndex* pindexBlock, CTxIndex& txindex,
 
 bool GetNameOfTx(const CTransaction& tx, vector<unsigned char>& name)
 {
-    if (tx.nVersion != NAMECOIN_TX_VERSION)
+    if (tx.nVersion != SIXELEVEN_TX_VERSION)
         return false;
     vector<vector<unsigned char> > vvchArgs;
     int op;
@@ -2136,7 +2153,7 @@ bool GetNameOfTx(const CTransaction& tx, vector<unsigned char>& name)
 
     bool good = DecodeNameTx(tx, op, nOut, vvchArgs, -1);
     if (!good)
-        return error("GetNameOfTx() : could not decode a namecoin tx");
+        return error("GetNameOfTx() : could not decode a 611 tx");
 
     switch (op)
     {
@@ -2151,7 +2168,7 @@ bool GetNameOfTx(const CTransaction& tx, vector<unsigned char>& name)
 bool
 IsConflictedTx (DatabaseSet& dbset, const CTransaction& tx, vchType& name)
 {
-    if (tx.nVersion != NAMECOIN_TX_VERSION)
+    if (tx.nVersion != SIXELEVEN_TX_VERSION)
         return false;
     vector<vchType> vvchArgs;
     int op;
@@ -2159,7 +2176,7 @@ IsConflictedTx (DatabaseSet& dbset, const CTransaction& tx, vchType& name)
 
     bool good = DecodeNameTx(tx, op, nOut, vvchArgs, pindexBest->nHeight);
     if (!good)
-        return error("IsConflictedTx() : could not decode a namecoin tx");
+        return error("IsConflictedTx() : could not decode a 611 tx");
     int nPrevHeight;
     int nDepth;
     int64 nNetFee;
@@ -2176,7 +2193,7 @@ IsConflictedTx (DatabaseSet& dbset, const CTransaction& tx, vchType& name)
 }
 
 bool
-CNamecoinHooks::ConnectInputs (DatabaseSet& dbset,
+C611Hooks::ConnectInputs (DatabaseSet& dbset,
                                map<uint256, CTxIndex>& mapTestPool,
                                const CTransaction& tx,
                                vector<CTransaction>& vTxPrev,
@@ -2234,7 +2251,7 @@ CNamecoinHooks::ConnectInputs (DatabaseSet& dbset,
             printf("Name bug warning: argument concatenation happened in tx %s (block height %d)\n", tx.GetHash().GetHex().c_str(), pindexBlock->nHeight);
     }
 
-    if (tx.nVersion != NAMECOIN_TX_VERSION)
+    if (tx.nVersion != SIXELEVEN_TX_VERSION)
     {
         /* See if there are any name outputs.  If they are, disallow
            for mempool or after the corresponding soft fork point.  Note
@@ -2254,12 +2271,12 @@ CNamecoinHooks::ConnectInputs (DatabaseSet& dbset,
         }
 
         if (foundOuts && (!fBlock || doStrictChecks (pindexBlock->nHeight)))
-            return error("ConnectInputHook: non-Namecoin tx has name outputs");
+            return error("ConnectInputHook: non-611 tx has name outputs");
 
         // Make sure name-op outputs are not spent by a regular transaction, or the name
         // would be lost
         if (found)
-            return error("ConnectInputHook() : a non-namecoin transaction with a namecoin input");
+            return error("ConnectInputHook() : a non-611 transaction with a 611 input");
         return true;
     }
 
@@ -2269,7 +2286,7 @@ CNamecoinHooks::ConnectInputs (DatabaseSet& dbset,
 
     bool good = DecodeNameTx(tx, op, nOut, vvchArgs, pindexBlock->nHeight);
     if (!good)
-        return error("ConnectInputsHook() : could not decode a namecoin tx");
+        return error("ConnectInputsHook() : could not decode a 611 tx");
 
     int nPrevHeight;
     int nDepth;
@@ -2297,7 +2314,7 @@ CNamecoinHooks::ConnectInputs (DatabaseSet& dbset,
     {
         case OP_NAME_NEW:
             if (found)
-                return error("ConnectInputsHook() : name_new tx pointing to previous namecoin tx");
+                return error("ConnectInputsHook() : name_new tx pointing to previous 611 tx");
 
             // HACK: The following check is redundant after hard-fork at block 150000, because it is performed
             // in CheckTransaction. However, before that, we do not know height during CheckTransaction
@@ -2473,10 +2490,10 @@ CNamecoinHooks::ConnectInputs (DatabaseSet& dbset,
 }
 
 bool
-CNamecoinHooks::DisconnectInputs (DatabaseSet& dbset, const CTransaction& tx,
+C611Hooks::DisconnectInputs (DatabaseSet& dbset, const CTransaction& tx,
                                   CBlockIndex* pindexBlock)
 {
-    if (tx.nVersion != NAMECOIN_TX_VERSION)
+    if (tx.nVersion != SIXELEVEN_TX_VERSION)
         return true;
 
     vector<vector<unsigned char> > vvchArgs;
@@ -2485,7 +2502,7 @@ CNamecoinHooks::DisconnectInputs (DatabaseSet& dbset, const CTransaction& tx,
 
     bool good = DecodeNameTx(tx, op, nOut, vvchArgs, pindexBlock->nHeight);
     if (!good)
-        return error("DisconnectInputsHook() : could not decode namecoin tx");
+        return error("DisconnectInputsHook() : could not decode 611 tx");
     if (op == OP_NAME_FIRSTUPDATE || op == OP_NAME_UPDATE)
     {
         //vector<CDiskTxPos> vtxPos;
@@ -2512,9 +2529,9 @@ CNamecoinHooks::DisconnectInputs (DatabaseSet& dbset, const CTransaction& tx,
     return true;
 }
 
-bool CNamecoinHooks::CheckTransaction(const CTransaction& tx)
+bool C611Hooks::CheckTransaction(const CTransaction& tx)
 {
-    if (tx.nVersion != NAMECOIN_TX_VERSION)
+    if (tx.nVersion != SIXELEVEN_TX_VERSION)
         return true;
 
     std::vector<vchType> vvch;
@@ -2580,7 +2597,7 @@ static string nameFromOp(int op)
     }
 }
 
-bool CNamecoinHooks::ExtractAddress(const CScript& script, string& address)
+bool C611Hooks::ExtractAddress(const CScript& script, string& address)
 {
     if (script.size() == 1 && script[0] == OP_RETURN)
     {
@@ -2614,14 +2631,14 @@ bool CNamecoinHooks::ExtractAddress(const CScript& script, string& address)
 }
 
 bool
-CNamecoinHooks::ConnectBlock (CBlock& block, DatabaseSet& dbset,
+C611Hooks::ConnectBlock (CBlock& block, DatabaseSet& dbset,
                               CBlockIndex* pindex)
 {
     return true;
 }
 
 bool
-CNamecoinHooks::DisconnectBlock (CBlock& block, DatabaseSet& dbset,
+C611Hooks::DisconnectBlock (CBlock& block, DatabaseSet& dbset,
                                  CBlockIndex* pindex)
 {
     return true;
@@ -2632,71 +2649,88 @@ bool GenesisBlock(CBlock& block, int extra)
     block = CBlock();
     block.hashPrevBlock = 0;
     block.nVersion = 1;
-    block.nTime    = 1303000001;
-    block.nBits    = 0x1c007fff;
-    block.nNonce   = 0xa21ea192U;
-    const char* pszTimestamp = "... choose what comes next.  Lives of your own, or a return to chains. -- V";
+    block.nTime    = 1439667452;
+    block.nTime    = 1440114144;
+    block.nBits    = 0x1e0ffff0;
+    // block.nBits    = 0x1c007fff;
+    block.nNonce   = 611611611;
+    // block.nNonce   = 0x19999139;
+    // block.nNonce   =  199991039;
+    const char* pszTimestamp = "The really good drivers got the bugs on the side windows. -- Walter Roehrl";
     CTransaction txNew;
     txNew.vin.resize(1);
     txNew.vout.resize(1);
     txNew.vin[0].scriptSig = CScript() << block.nBits << CBigNum(++extra) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-    txNew.vout[0].nValue = 50 * COIN;
-    txNew.vout[0].scriptPubKey = CScript() << ParseHex("04b620369050cd899ffbbc4e8ee51e8c4534a855bb463439d63d235d4779685d8b6f4870a238cf365ac94fa13ef9a2a22cd99d0d5ee86dcabcafce36c7acf43ce5") << OP_CHECKSIG;
+    txNew.vout[0].nValue = 611 * COIN;
+    txNew.vout[0].scriptPubKey = CScript() << ParseHex("04d7309d1393e30954dbe9c5a760c26eeb4f7dbd449522499a436bae9fcac796cb1b270bb50a4b21dc61d55ba2ec3a5f796581bf2c51dfba91724f2ae2dc32c616") << OP_CHECKSIG;
     block.vtx.push_back(txNew);
     block.hashMerkleRoot = block.BuildMerkleTree();
     printf("====================================\n");
     printf("Merkle: %s\n", block.hashMerkleRoot.GetHex().c_str());
     printf("Block: %s\n", block.GetHash().GetHex().c_str());
+
+        // if (!hooks->GenesisBlock(block))
+        // {
+            //// debug print
+            printf("Block: %s\n", block.GetHash().ToString().c_str());
+            printf("Genesis: %s\n", hashGenesisBlock.ToString().c_str());
+            printf("Merkle %s\n", block.hashMerkleRoot.ToString().c_str());
+            // assert(block.hashMerkleRoot == uint256("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+            // block.print();
+            // assert(block.GetHash() == hashGenesisBlock);
+        // }
+
     block.print();
     assert(block.GetHash() == hashGenesisBlock);
     return true;
 }
 
-bool CNamecoinHooks::GenesisBlock(CBlock& block)
+bool C611Hooks::GenesisBlock(CBlock& block)
 {
     if (fTestNet)
         return false;
 
-    return ::GenesisBlock(block, NAME_COIN_GENESIS_EXTRA);
+    return ::GenesisBlock(block, SIXELEVEN_COIN_GENESIS_EXTRA);
 }
 
-int CNamecoinHooks::LockinHeight()
+int C611Hooks::LockinHeight()
 {
     if (fTestNet)
         return 0;
 
-    return 193000;
+    // return 193000;
+    return 0;
 }
 
-bool CNamecoinHooks::Lockin(int nHeight, uint256 hash)
+bool C611Hooks::Lockin(int nHeight, uint256 hash)
 {
-    if (!fTestNet)
-        if ((nHeight == 2016 && hash != uint256("0x0000000000660bad0d9fbde55ba7ee14ddf766ed5f527e3fbca523ac11460b92")) ||
-                (nHeight ==   4032 && hash != uint256("0x0000000000493b5696ad482deb79da835fe2385304b841beef1938655ddbc411")) ||
-                (nHeight ==   6048 && hash != uint256("0x000000000027939a2e1d8bb63f36c47da858e56d570f143e67e85068943470c9")) ||
-                (nHeight ==   8064 && hash != uint256("0x000000000003a01f708da7396e54d081701ea406ed163e519589717d8b7c95a5")) ||
-                (nHeight ==  10080 && hash != uint256("0x00000000000fed3899f818b2228b4f01b9a0a7eeee907abd172852df71c64b06")) ||
-                (nHeight ==  12096 && hash != uint256("0x0000000000006c06988ff361f124314f9f4bb45b6997d90a7ee4cedf434c670f")) ||
-                (nHeight ==  14112 && hash != uint256("0x00000000000045d95e0588c47c17d593c7b5cb4fb1e56213d1b3843c1773df2b")) ||
-                (nHeight ==  16128 && hash != uint256("0x000000000001d9964f9483f9096cf9d6c6c2886ed1e5dec95ad2aeec3ce72fa9")) ||
-                (nHeight ==  18940 && hash != uint256("0x00000000000087f7fc0c8085217503ba86f796fa4984f7e5a08b6c4c12906c05")) ||
-                (nHeight ==  30240 && hash != uint256("0xe1c8c862ff342358384d4c22fa6ea5f669f3e1cdcf34111f8017371c3c0be1da")) ||
-                (nHeight ==  57000 && hash != uint256("0xaa3ec60168a0200799e362e2b572ee01f3c3852030d07d036e0aa884ec61f203")) ||
-                (nHeight == 112896 && hash != uint256("0x73f880e78a04dd6a31efc8abf7ca5db4e262c4ae130d559730d6ccb8808095bf")) ||
-                (nHeight == 182000 && hash != uint256("0xd47b4a8fd282f635d66ce34ebbeb26ffd64c35b41f286646598abfd813cba6d9")) ||
-                (nHeight == 193000 && hash != uint256("0x3b85e70ba7f5433049cfbcf0ae35ed869496dbedcd1c0fafadb0284ec81d7b58")))
-            return false;
+//    if (!fTestNet)
+//        if ((nHeight == 2016 && hash != uint256("0x0000000000660bad0d9fbde55ba7ee14ddf766ed5f527e3fbca523ac11460b92")) ||
+//                (nHeight ==   4032 && hash != uint256("0x0000000000493b5696ad482deb79da835fe2385304b841beef1938655ddbc411")) ||
+//                (nHeight ==   6048 && hash != uint256("0x000000000027939a2e1d8bb63f36c47da858e56d570f143e67e85068943470c9")) ||
+//                (nHeight ==   8064 && hash != uint256("0x000000000003a01f708da7396e54d081701ea406ed163e519589717d8b7c95a5")) ||
+//                (nHeight ==  10080 && hash != uint256("0x00000000000fed3899f818b2228b4f01b9a0a7eeee907abd172852df71c64b06")) ||
+//                (nHeight ==  12096 && hash != uint256("0x0000000000006c06988ff361f124314f9f4bb45b6997d90a7ee4cedf434c670f")) ||
+//                (nHeight ==  14112 && hash != uint256("0x00000000000045d95e0588c47c17d593c7b5cb4fb1e56213d1b3843c1773df2b")) ||
+//                (nHeight ==  16128 && hash != uint256("0x000000000001d9964f9483f9096cf9d6c6c2886ed1e5dec95ad2aeec3ce72fa9")) ||
+//                (nHeight ==  18940 && hash != uint256("0x00000000000087f7fc0c8085217503ba86f796fa4984f7e5a08b6c4c12906c05")) ||
+//                (nHeight ==  30240 && hash != uint256("0xe1c8c862ff342358384d4c22fa6ea5f669f3e1cdcf34111f8017371c3c0be1da")) ||
+//                (nHeight ==  57000 && hash != uint256("0xaa3ec60168a0200799e362e2b572ee01f3c3852030d07d036e0aa884ec61f203")) ||
+//                (nHeight == 112896 && hash != uint256("0x73f880e78a04dd6a31efc8abf7ca5db4e262c4ae130d559730d6ccb8808095bf")) ||
+//                (nHeight == 182000 && hash != uint256("0xd47b4a8fd282f635d66ce34ebbeb26ffd64c35b41f286646598abfd813cba6d9")) ||
+//                (nHeight == 193000 && hash != uint256("0x3b85e70ba7f5433049cfbcf0ae35ed869496dbedcd1c0fafadb0284ec81d7b58")))
+//            return false;
     return true;
 }
 
-string CNamecoinHooks::IrcPrefix()
+string C611Hooks::IrcPrefix()
 {
-    return "namecoin";
+    return "611";
 }
 
 unsigned short GetDefaultPort()
 {
-    return fTestNet ? 18334 : 8334;
+    return fTestNet ? 18661 : 8661;
 }
 
 unsigned int pnSeed[] = { 0x58cea445, 0x2b562f4e, 0x291f20b2, 0 };
@@ -2705,12 +2739,12 @@ const char *strDNSSeed[] = { NULL };
 string GetDefaultDataDirSuffix() {
 #ifdef __WXMSW__
     // Windows
-    return string("Namecoin");
+    return string("611");
 #else
 #ifdef MAC_OSX
-    return string("Namecoin");
+    return string("611");
 #else
-    return string(".namecoin");
+    return string(".611");
 #endif
 #endif
 }

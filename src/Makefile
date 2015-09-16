@@ -31,7 +31,7 @@ LIBS= \
    -l ssl \
    -l crypto
 
-namecoin: USE_UPNP:=1
+611: USE_UPNP:=1
 	ifdef USE_UPNP
 		LIBS += -l miniupnpc
 		DEFS += -DUSE_UPNP=$(USE_UPNP)
@@ -51,7 +51,7 @@ namecoin: USE_UPNP:=1
 			-l pthread
 	endif
 
-namecoind: USE_UPNP:=0
+611d: USE_UPNP:=0
 	ifdef USE_UPNP
 		LIBS += -l miniupnpc
 		DEFS += -DUSE_UPNP=$(USE_UPNP)
@@ -92,7 +92,7 @@ OBJS= \
     cryptopp/obj/sha.o \
     cryptopp/obj/cpu.o
 
-all: namecoind
+all: 611d
 
 
 obj/%.o: %.cpp $(HEADERS)
@@ -107,13 +107,13 @@ obj/nogui/%.o: %.cpp $(HEADERS)
 obj/test/%.o: test/%.cpp $(HEADERS)
 	$(CXX) -c $(CFLAGS) -o $@ $<
 
-obj/nogui/namecoin.o: namecoin.h
+obj/nogui/611.o: 611.h
 
-namecoind: $(OBJS:obj/%=obj/nogui/%) obj/nogui/namecoin.o
+611d: $(OBJS:obj/%=obj/nogui/%) obj/nogui/611.o
 	$(CXX) $(CXXFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
 
 clean:
-	-rm -f namecoin namecoind
+	-rm -f 611 611d
 	-rm -f obj/*.o
 	-rm -f obj/nogui/*.o
 	-rm -f obj/test/*.o

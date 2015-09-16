@@ -66,7 +66,7 @@ void Shutdown(void* parg)
         delete pwalletMain;
         CreateThread(ExitTimeout, NULL);
         MilliSleep(50);
-        printf("namecoin exiting\n\n");
+        printf("611 exiting\n\n");
         fExit = true;
 #ifndef GUI
         // ensure non-UI client gets exited here, but let Bitcoin-Qt reach 'return 0;' in bitcoin.cpp
@@ -187,18 +187,18 @@ bool AppInit2(int argc, char* argv[])
     if (mapArgs.count("-?") || mapArgs.count("--help"))
     {
         string strUsage = string() +
-          _("namecoin version") + " " + FormatFullVersion() + "\n\n" +
+          _("611 version") + " " + FormatFullVersion() + "\n\n" +
           _("Usage:") + "\t\t\t\t\t\t\t\t\t\t\n" +
-            "  namecoin [options]                   \t  " + "\n" +
-            "  namecoin [options] <command> [params]\t  " + _("Send command to -server or namecoind") + "\n" +
-            "  namecoin [options] help              \t\t  " + _("List commands") + "\n" +
-            "  namecoin [options] help <command>    \t\t  " + _("Get help for a command") + "\n";
+            "  611 [options]                   \t  " + "\n" +
+            "  611 [options] <command> [params]\t  " + _("Send command to -server or 611d") + "\n" +
+            "  611 [options] help              \t\t  " + _("List commands") + "\n" +
+            "  611 [options] help <command>    \t\t  " + _("Get help for a command") + "\n";
 
         strUsage += "\n" + HelpMessage();
 
 #if defined(__WXMSW__) && defined(GUI)
         // Tabs make the columns line up in the message box
-        wxMessageBox(strUsage, "Namecoin", wxOK);
+        wxMessageBox(strUsage, "611", wxOK);
 #else
         // Remove tabs
         strUsage.erase(std::remove(strUsage.begin(), strUsage.end(), '\t'), strUsage.end());
@@ -268,7 +268,7 @@ bool AppInit2(int argc, char* argv[])
     if (!fDebug && !pszSetDataDir[0])
         ShrinkDebugFile();
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    printf("namecoin version %s\n", FormatFullVersion().c_str());
+    printf("611 version %s\n", FormatFullVersion().c_str());
 //#ifdef GUI
 #if 0
     printf("OS version %s\n", ((string)wxGetOsDescription()).c_str());
@@ -316,7 +316,7 @@ bool AppInit2(int argc, char* argv[])
         loop
         {
             // Show the previous instance and exit
-            HWND hwndPrev = FindWindowA("wxWindowClassNR", "Namecoin");
+            HWND hwndPrev = FindWindowA("wxWindowClassNR", "611");
             if (hwndPrev)
             {
                 if (IsIconic(hwndPrev))
@@ -345,7 +345,7 @@ bool AppInit2(int argc, char* argv[])
     static boost::interprocess::file_lock lock(strLockFile.c_str());
     if (!lock.try_lock())
     {
-        wxMessageBox(strprintf(_("Cannot obtain a lock on data directory %s.  namecoin is probably already running."), GetDataDir().c_str()), "Namecoin");
+        wxMessageBox(strprintf(_("Cannot obtain a lock on data directory %s.  611 is probably already running."), GetDataDir().c_str()), "611");
         return false;
     }
 
@@ -355,7 +355,7 @@ bool AppInit2(int argc, char* argv[])
     {
         if (!BindListenPort(strErrors))
         {
-            wxMessageBox(strErrors, "Namecoin");
+            wxMessageBox(strErrors, "611");
             return false;
         }
     }
@@ -366,7 +366,7 @@ bool AppInit2(int argc, char* argv[])
     // Load data files
     //
     if (fDaemon)
-        fprintf(stdout, "namecoin server starting\n");
+        fprintf(stdout, "611 server starting\n");
     strErrors = "";
     int64 nStart;
 
@@ -445,7 +445,7 @@ bool AppInit2(int argc, char* argv[])
     {
         if (!ParseMoney(mapArgs["-mininput"], nMinimumInputValue))
         {
-            wxMessageBox(_("Invalid amount for -mininput=<amount>"), "Namecoin");
+            wxMessageBox(_("Invalid amount for -mininput=<amount>"), "611");
             return false;
         }
     }
@@ -482,7 +482,7 @@ bool AppInit2(int argc, char* argv[])
 
     if (!strErrors.empty())
     {
-        wxMessageBox(strErrors, "Namecoin", wxOK | wxICON_ERROR);
+        wxMessageBox(strErrors, "611", wxOK | wxICON_ERROR);
         return false;
     }
 
@@ -537,7 +537,7 @@ bool AppInit2(int argc, char* argv[])
         addrProxy = CAddress(mapArgs["-proxy"]);
         if (!addrProxy.IsValid())
         {
-            wxMessageBox(_("Invalid -proxy address"), "Namecoin");
+            wxMessageBox(_("Invalid -proxy address"), "611");
             return false;
         }
     }
@@ -562,11 +562,11 @@ bool AppInit2(int argc, char* argv[])
     {
         if (!ParseMoney(mapArgs["-paytxfee"], nTransactionFee))
         {
-            wxMessageBox(_("Invalid amount for -paytxfee=<amount>"), "Namecoin");
+            wxMessageBox(_("Invalid amount for -paytxfee=<amount>"), "611");
             return false;
         }
         if (nTransactionFee > 0.25 * COIN)
-            wxMessageBox(_("Warning: -paytxfee is set very high.  This is the transaction fee you will pay if you send a transaction."), "Namecoin", wxOK | wxICON_EXCLAMATION);
+            wxMessageBox(_("Warning: -paytxfee is set very high.  This is the transaction fee you will pay if you send a transaction."), "611", wxOK | wxICON_EXCLAMATION);
     }
 
     if (fHaveUPnP)
@@ -594,7 +594,7 @@ bool AppInit2(int argc, char* argv[])
     RandAddSeedPerfmon();
 
     if (!CreateThread(StartNode, NULL))
-        wxMessageBox("Error: CreateThread(StartNode) failed", "Namecoin");
+        wxMessageBox("Error: CreateThread(StartNode) failed", "611");
 
     /* We're done initialising, from now on, the RPC daemon
        can work as usual.  */
@@ -617,8 +617,8 @@ bool AppInit2(int argc, char* argv[])
 std::string HelpMessage()
 {
     std::string strUsage = std::string(_("Options:\n")) +
-        "  -conf=<file>     \t\t  " + _("Specify configuration file (default: namecoin.conf)\n") +
-        "  -pid=<file>      \t\t  " + _("Specify pid file (default: namecoind.pid)\n") +
+        "  -conf=<file>     \t\t  " + _("Specify configuration file (default: 611.conf)\n") +
+        "  -pid=<file>      \t\t  " + _("Specify pid file (default: 611d.pid)\n") +
         "  -walletpath=<file> \t  " + _("Specify the wallet filename (default: wallet.dat)") + "\n" +
         "  -gen             \t\t  " + _("Generate coins\n") +
         "  -gen=0           \t\t  " + _("Don't generate coins\n") +
@@ -658,7 +658,7 @@ std::string HelpMessage()
 
 #ifdef USE_SSL
     strUsage += std::string() +
-        _("\nSSL options: (see the namecoin Wiki for SSL setup instructions)\n") +
+        _("\nSSL options: (see the 611 Wiki for SSL setup instructions)\n") +
         "  -rpcssl                                \t  " + _("Use OpenSSL (https) for JSON-RPC connections\n") +
         "  -rpcsslcertificatechainfile=<file.cert>\t  " + _("Server certificate file (default: server.cert)\n") +
         "  -rpcsslprivatekeyfile=<file.pem>       \t  " + _("Server private key (default: server.pem)\n") +

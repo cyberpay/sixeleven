@@ -7,7 +7,7 @@
 #include "guiconstants.h"
 #include "../headers.h"
 #include "../wallet.h"
-#include "../namecoin.h"
+#include "../611.h"
 
 #include "../json/json_spirit.h"
 #include "../json/json_spirit_utils.h"

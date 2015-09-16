@@ -6,13 +6,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Namecoin</source>
-        <translation>Om Namecoin</translation>
+        <source>About 611</source>
+        <translation>Om 611</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Namecoin&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Namecoin&lt;/b&gt;-version</translation>
+        <source>&lt;b&gt;611&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;611&lt;/b&gt;-version</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -37,7 +37,7 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="+0"/>
-        <source>2009-%1 The Bitcoin and Namecoin developers</source>
+        <source>2009-%1 The Bitcoin and 611 developers</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -70,8 +70,8 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="-46"/>
-        <source>These are your Namecoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Detta är dina Namecoin-adresser för att ta emot betalningar.  Du kan ge varje avsändare en egen adress så att du kan hålla reda på vem som betalar dig.</translation>
+        <source>These are your 611 addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Detta är dina 611-adresser för att ta emot betalningar.  Du kan ge varje avsändare en egen adress så att du kan hålla reda på vem som betalar dig.</translation>
     </message>
     <message>
         <location line="+60"/>
@@ -85,7 +85,7 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Namecoin address</source>
+        <source>Sign a message to prove you own a 611 address</source>
         <translation>Signera ett meddelande för att bevisa att du äger denna adress</translation>
     </message>
     <message>
@@ -100,8 +100,8 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="-14"/>
-        <source>Verify a message to ensure it was signed with a specified Namecoin address</source>
-        <translation>Verifiera meddelandet för att vara säker på att den var signerad med den specificerade Namecoin-adressen</translation>
+        <source>Verify a message to ensure it was signed with a specified 611 address</source>
+        <translation>Verifiera meddelandet för att vara säker på att den var signerad med den specificerade 611-adressen</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -236,7 +236,7 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR NAMECOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SIXELEVENS&lt;/b&gt;!</source>
         <translation>VARNING: Om du krypterar din plånbok och glömmer ditt lösenord, kommer du att &lt;b&gt;FÖRLORA ALLA DINA TILLGÅNGAR&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -263,7 +263,7 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="-56"/>
-        <source>Namecoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your Namecoins from being stolen by malware infecting your computer.</source>
+        <source>611 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your 611s from being stolen by malware infecting your computer.</source>
         <translation type="unfinished">Programmet kommer nu att stänga ner för att färdigställa krypteringen. Tänk på att en krypterad plånbok inte skyddar mot stöld om din dator är infekterad med en keylogger.</translation>
     </message>
     <message>
@@ -312,14 +312,14 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     <name>BitcoinGUI</name>
     <message>
         <location filename="../bitcoin.cpp" line="+118"/>
-        <source>A fatal error occurred. Namecoin can no longer continue safely and will quit.</source>
-        <translation type="unfinished">Ett allvarligt fel har uppstått. Namecoin kan inte längre köras säkert och kommer att avslutas.</translation>
+        <source>A fatal error occurred. 611 can no longer continue safely and will quit.</source>
+        <translation type="unfinished">Ett allvarligt fel har uppstått. 611 kan inte längre köras säkert och kommer att avslutas.</translation>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="+74"/>
         <location line="+565"/>
-        <source>Namecoin</source>
-        <translation type="unfinished">Namecoin</translation>
+        <source>611</source>
+        <translation type="unfinished">611</translation>
     </message>
     <message>
         <location line="-565"/>
@@ -339,17 +339,17 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     <message>
         <location line="+6"/>
         <source>&amp;Send coins</source>
-        <translation type="unfinished">&amp;Skicka Namecoins</translation>
+        <translation type="unfinished">&amp;Skicka 611s</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Send coins to a Namecoin address</source>
-        <translation type="unfinished">Skicka mynt till en Namecoin-adress</translation>
+        <source>Send coins to a 611 address</source>
+        <translation type="unfinished">Skicka mynt till en 611-adress</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>&amp;Receive coins</source>
-        <translation type="unfinished">&amp;Ta emot Namecoins</translation>
+        <translation type="unfinished">&amp;Ta emot 611s</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -383,7 +383,7 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="+1"/>
-        <source>Manage names registered via Namecoin</source>
+        <source>Manage names registered via 611</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -398,13 +398,13 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;About Namecoin</source>
-        <translation type="unfinished">&amp;Om Namecoin</translation>
+        <source>&amp;About 611</source>
+        <translation type="unfinished">&amp;Om 611</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Show information about Namecoin</source>
-        <translation type="unfinished">Visa information om Namecoin</translation>
+        <source>Show information about 611</source>
+        <translation type="unfinished">Visa information om 611</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -423,8 +423,8 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="+1"/>
-        <source>Modify configuration options for Namecoin</source>
-        <translation type="unfinished">Ändra konfigurationsalternativ för Namecoin</translation>
+        <source>Modify configuration options for 611</source>
+        <translation type="unfinished">Ändra konfigurationsalternativ för 611</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -473,7 +473,7 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="+1"/>
-        <source>Sign messages with your Namecoin addresses to prove you own them</source>
+        <source>Sign messages with your 611 addresses to prove you own them</source>
         <translation type="unfinished">Signera meddelanden med din Bitcoinadress för att bevisa att du äger dem</translation>
     </message>
     <message>
@@ -483,8 +483,8 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     </message>
     <message>
         <location line="+1"/>
-        <source>Verify messages to ensure they were signed with specified Namecoin addresses</source>
-        <translation type="unfinished">Verifiera meddelanden för att vara säker på att de var signerade med den specificerade Namecoin-adressen</translation>
+        <source>Verify messages to ensure they were signed with specified 611 addresses</source>
+        <translation type="unfinished">Verifiera meddelanden för att vara säker på att de var signerade med den specificerade 611-adressen</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -540,15 +540,15 @@ Denna produkten innehåller mjukvara utvecklad av OpenSSL Project för användni
     <message>
         <location line="-5"/>
         <location line="+5"/>
-        <source>Namecoin client</source>
-        <translation type="unfinished">Namecoin-klient</translation>
+        <source>611 client</source>
+        <translation type="unfinished">611-klient</translation>
     </message>
     <message numerus="yes">
         <location line="+81"/>
-        <source>%n active connection(s) to Namecoin network</source>
+        <source>%n active connection(s) to 611 network</source>
         <translation type="unfinished">
-            <numerusform>%n aktiv anslutning till Namecoin-nätverket</numerusform>
-            <numerusform>%n aktiva anslutningar till Namecoin-nätverket</numerusform>
+            <numerusform>%n aktiv anslutning till 611-nätverket</numerusform>
+            <numerusform>%n aktiva anslutningar till 611-nätverket</numerusform>
         </translation>
     </message>
     <message>
@@ -682,8 +682,8 @@ Adress: %4
     <message>
         <location line="-28"/>
         <location line="+28"/>
-        <source>URI can not be parsed! This can be caused by an invalid Namecoin address or malformed URI parameters.</source>
-        <translation type="unfinished">URI går inte att tolkas! Detta kan orsakas av en ogiltig Namecoin-adress eller felaktiga URI parametrar.</translation>
+        <source>URI can not be parsed! This can be caused by an invalid 611 address or malformed URI parameters.</source>
+        <translation type="unfinished">URI går inte att tolkas! Detta kan orsakas av en ogiltig 611-adress eller felaktiga URI parametrar.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -862,7 +862,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="-26"/>
-        <source>Namecoin address to which the name is assigned</source>
+        <source>611 address to which the name is assigned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -877,7 +877,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+322"/>
-        <source>The Namecoin address to transfer
+        <source>The 611 address to transfer
 the domain to, e.g.
 N1KHAL5C1CRzy58NdJwp1tbLze3XrkFxx9
 
@@ -984,8 +984,8 @@ Leave empty, if not needed.</source>
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Namecoin address.</source>
-        <translation>Den angivna adressen &quot;%1&quot; är inte en giltig Namecoin-adress.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid 611 address.</source>
+        <translation>Den angivna adressen &quot;%1&quot; är inte en giltig 611-adress.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1003,8 +1003,8 @@ Leave empty, if not needed.</source>
     <message>
         <location filename="../guiutil.cpp" line="+423"/>
         <location line="+12"/>
-        <source>Namecoin-Qt</source>
-        <translation>Namecoin-Qt</translation>
+        <source>611-Qt</source>
+        <translation>611-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -1056,12 +1056,12 @@ Leave empty, if not needed.</source>
     </message>
     <message>
         <location line="+13"/>
-        <source>Enter a name or domain name (prefixed with d/) to be registered via Namecoin.</source>
+        <source>Enter a name or domain name (prefixed with d/) to be registered via 611.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+16"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use &lt;span style=&quot; font-weight:600;&quot;&gt;d/&lt;/span&gt; prefix for domain names. E.g. &lt;span style=&quot; font-weight:600;&quot;&gt;d/mysite&lt;/span&gt; will register &lt;span style=&quot; font-weight:600;&quot;&gt;mysite.bit&lt;/span&gt; (note: domains can be lower-case only, valid characters are alphanumeric and hyphen; hyphen can&apos;t be first/last character).&lt;/p&gt;&lt;p&gt;See &lt;a href=&quot;http://dot-bit.org/Namespace:Domain_names&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Domain names&lt;/span&gt;&lt;/a&gt; in Namecoin wiki for reference. Other prefixes can be used for miscellaneous purposes (not domain names).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use &lt;span style=&quot; font-weight:600;&quot;&gt;d/&lt;/span&gt; prefix for domain names. E.g. &lt;span style=&quot; font-weight:600;&quot;&gt;d/mysite&lt;/span&gt; will register &lt;span style=&quot; font-weight:600;&quot;&gt;mysite.bit&lt;/span&gt; (note: domains can be lower-case only, valid characters are alphanumeric and hyphen; hyphen can&apos;t be first/last character).&lt;/p&gt;&lt;p&gt;See &lt;a href=&quot;http://dot-bit.org/Namespace:Domain_names&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Domain names&lt;/span&gt;&lt;/a&gt; in 611 wiki for reference. Other prefixes can be used for miscellaneous purposes (not domain names).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1092,7 +1092,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+16"/>
-        <source>Enter Namecoin address (or prefix of it)</source>
+        <source>Enter 611 address (or prefix of it)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1237,7 +1237,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+140"/>
-        <source>Name registered using Namecoin.</source>
+        <source>Name registered using 611.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1247,7 +1247,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+2"/>
-        <source>Namecoin address to which the name is registered.</source>
+        <source>611 address to which the name is registered.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1280,13 +1280,13 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Namecoin after logging in to the system.</source>
-        <translation>Starta Namecoin automatiskt efter inloggning.</translation>
+        <source>Automatically start 611 after logging in to the system.</source>
+        <translation>Starta 611 automatiskt efter inloggning.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Namecoin on system login</source>
-        <translation>&amp;Starta Namecoin vid systemstart</translation>
+        <source>&amp;Start 611 on system login</source>
+        <translation>&amp;Starta 611 vid systemstart</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -1305,8 +1305,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Namecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Öppna automatiskt Namecoin-klientens port på routern. Detta fungerar endast om din router har UPnP aktiverat.</translation>
+        <source>Automatically open the 611 client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Öppna automatiskt 611-klientens port på routern. Detta fungerar endast om din router har UPnP aktiverat.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1315,8 +1315,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Namecoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>Anslut till Namecoin-nätverket genom en SOCKS-proxy (t.ex. när du ansluter genom Tor).</translation>
+        <source>Connect to the 611 network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>Anslut till 611-nätverket genom en SOCKS-proxy (t.ex. när du ansluter genom Tor).</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1390,8 +1390,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Namecoin.</source>
-        <translation>Användargränssnittets språk kan ställas in här. Denna inställning träder i kraft efter en omstart av Namecoin.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting 611.</source>
+        <translation>Användargränssnittets språk kan ställas in här. Denna inställning träder i kraft efter en omstart av 611.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -1405,8 +1405,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Namecoin addresses in the transaction list or not.</source>
-        <translation>Anger om Namecoin-adresser skall visas i transaktionslistan.</translation>
+        <source>Whether to show 611 addresses in the transaction list or not.</source>
+        <translation>Anger om 611-adresser skall visas i transaktionslistan.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1457,8 +1457,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Namecoin.</source>
-        <translation>Denna inställning träder i kraft efter en omstart av Namecoin.</translation>
+        <source>This setting will take effect after restarting 611.</source>
+        <translation>Denna inställning träder i kraft efter en omstart av 611.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1476,8 +1476,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     <message>
         <location line="+51"/>
         <location line="+183"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Namecoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Den visade informationen kan vara inaktuell. Plånboken synkroniseras automatiskt med Namecoin-nätverket efter att anslutningen är upprättad, men denna process har inte slutförts ännu.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the 611 network after a connection is established, but this process has not completed yet.</source>
+        <translation>Den visade informationen kan vara inaktuell. Plånboken synkroniseras automatiskt med 611-nätverket efter att anslutningen är upprättad, men denna process har inte slutförts ännu.</translation>
     </message>
     <message>
         <location line="-141"/>
@@ -1540,7 +1540,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+108"/>
-        <source>Cannot start namecoin: click-to-pay handler</source>
+        <source>Cannot start 611: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1690,8 +1690,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Namecoin-Qt help message to get a list with possible Namecoin command-line options.</source>
-        <translation>Visa Namecoin-Qt hjälpmeddelande för att få en lista med möjliga Namecoin kommandoradsalternativ.</translation>
+        <source>Show the 611-Qt help message to get a list with possible 611 command-line options.</source>
+        <translation>Visa 611-Qt hjälpmeddelande för att få en lista med möjliga 611 kommandoradsalternativ.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1710,13 +1710,13 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="-104"/>
-        <source>Namecoin - Debug window</source>
-        <translation>Namecoin - Debug fönster</translation>
+        <source>611 - Debug window</source>
+        <translation>611 - Debug fönster</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>Namecoin Core</source>
-        <translation>Namecoin Kärna</translation>
+        <source>611 Core</source>
+        <translation>611 Kärna</translation>
     </message>
     <message>
         <location line="+279"/>
@@ -1725,8 +1725,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Namecoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Öppna Namecoin debug-loggfilen som finns i datakatalogen. Detta kan ta några sekunder för stora loggfiler.</translation>
+        <source>Open the 611 debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Öppna 611 debug-loggfilen som finns i datakatalogen. Detta kan ta några sekunder för stora loggfiler.</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1735,8 +1735,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the Namecoin RPC console.</source>
-        <translation>Välkommen till Namecoin RPC-konsollen.</translation>
+        <source>Welcome to the 611 RPC console.</source>
+        <translation>Välkommen till 611 RPC-konsollen.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1919,8 +1919,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Namecoin address (e.g. N1KHAL5C1CRzy58NdJwp1tbLze3XrkFxx9)</source>
-        <translation>Ange en Namecoin-adress (t.ex. N1KHAL5C1CRzy58NdJwp1tbLze3XrkFxx9)</translation>
+        <source>Enter a 611 address (e.g. N1KHAL5C1CRzy58NdJwp1tbLze3XrkFxx9)</source>
+        <translation>Ange en 611-adress (t.ex. N1KHAL5C1CRzy58NdJwp1tbLze3XrkFxx9)</translation>
     </message>
 </context>
 <context>
@@ -1984,7 +1984,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Namecoin address</source>
+        <source>Sign the message to prove you own this 611 address</source>
         <translation>Signera meddelandet för att bevisa att du äger denna adress</translation>
     </message>
     <message>
@@ -2020,8 +2020,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Namecoin address</source>
-        <translation>Verifiera meddelandet för att vara säker på att den var signerad med den angivna Namecoin-adressen</translation>
+        <source>Verify the message to ensure it was signed with the specified 611 address</source>
+        <translation>Verifiera meddelandet för att vara säker på att den var signerad med den angivna 611-adressen</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2036,8 +2036,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+26"/>
         <location line="+3"/>
-        <source>Enter a Namecoin address (e.g. N1KHAL5C1CRzy58NdJwp1tbLze3XrkFxx9)</source>
-        <translation>Ange en Namecoin-adress (t.ex. N1KHAL5C1CRzy58NdJwp1tbLze3XrkFxx9)</translation>
+        <source>Enter a 611 address (e.g. N1KHAL5C1CRzy58NdJwp1tbLze3XrkFxx9)</source>
+        <translation>Ange en 611-adress (t.ex. N1KHAL5C1CRzy58NdJwp1tbLze3XrkFxx9)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2046,8 +2046,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Namecoin signature</source>
-        <translation>Ange Namecoin-signatur</translation>
+        <source>Enter 611 signature</source>
+        <translation>Ange 611-signatur</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -2611,7 +2611,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+38"/>
-        <source>Invalid Namecoin address</source>
+        <source>Invalid 611 address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2631,13 +2631,13 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
 </context>
 <context>
-    <name>namecoin-core</name>
+    <name>611-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+9"/>
         <source>%s, you must set a rpcpassword in the configuration file:
  %s
 It is recommended you use the following random password:
-rpcuser=namecoinrpc
+rpcuser=611rpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
@@ -2646,7 +2646,7 @@ If the file does not exist, create it with owner-readable-only file permissions.
         <translation type="unfinished">%s, du behöver sätta ett rpclösensord i konfigurationsfilen:
 %s
 Det är rekommenderat att använda följande slumpade lösenord:
-rpcuser=namecoinrpc
+rpcuser=611rpc
 rpcpassword=%s
 (du behöver inte komma ihåg lösenordet)
 Användar namnet och lösenordet FÅR INTE bara detsamma.
@@ -2674,8 +2674,8 @@ Om filen inte existerar, skapa den med enbart ägarläsbara filrättigheter.</tr
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Namecoin is probably already running.</source>
-        <translation type="unfinished">Kan inte låsa data-mappen %s. Namecoin körs förmodligen redan.</translation>
+        <source>Cannot obtain a lock on data directory %s. 611 is probably already running.</source>
+        <translation type="unfinished">Kan inte låsa data-mappen %s. 611 körs förmodligen redan.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2690,7 +2690,7 @@ Om filen inte existerar, skapa den med enbart ägarläsbara filrättigheter.</tr
     <message>
         <location line="+4"/>
         <source>Error: This transaction requires a transaction fee of at least %s because of its amount, complexity, or use of recently received funds!</source>
-        <translation type="unfinished">Fel: Denna transaktion kräver en transaktionsavgift på minst %s på grund av dess storlek, komplexitet, eller användning av senast mottagna Namecoins!</translation>
+        <translation type="unfinished">Fel: Denna transaktion kräver en transaktionsavgift på minst %s på grund av dess storlek, komplexitet, eller användning av senast mottagna 611s!</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2729,8 +2729,8 @@ Om filen inte existerar, skapa den med enbart ägarläsbara filrättigheter.</tr
     </message>
     <message>
         <location line="+3"/>
-        <source>Unable to bind to %s on this computer. Namecoin is probably already running.</source>
-        <translation type="unfinished">Det går inte att binda till %s på den här datorn. Namecoin är förmodligen redan igång.</translation>
+        <source>Unable to bind to %s on this computer. 611 is probably already running.</source>
+        <translation type="unfinished">Det går inte att binda till %s på den här datorn. 611 är förmodligen redan igång.</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -2744,8 +2744,8 @@ Om filen inte existerar, skapa den med enbart ägarläsbara filrättigheter.</tr
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Namecoin will not work properly.</source>
-        <translation type="unfinished">Varning: Vänligen kolla så att din dators datum och tid är korrekt! Om din klocka går fel kommer Namecoin inte fungera korrekt.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong 611 will not work properly.</source>
+        <translation type="unfinished">Varning: Vänligen kolla så att din dators datum och tid är korrekt! Om din klocka går fel kommer 611 inte fungera korrekt.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2798,8 +2798,8 @@ Om filen inte existerar, skapa den med filrättigheten endast läsbar för ägar
     </message>
     <message>
         <location line="+1"/>
-        <source>Namecoin version</source>
-        <translation type="unfinished">Namecoin version</translation>
+        <source>611 version</source>
+        <translation type="unfinished">611 version</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2893,8 +2893,8 @@ Om filen inte existerar, skapa den med filrättigheten endast läsbar för ägar
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Namecoin</source>
-        <translation type="unfinished">Fel vid inläsningen av wallet.dat: Plånboken kräver en senare version av Namecoin</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of 611</source>
+        <translation type="unfinished">Fel vid inläsningen av wallet.dat: Plånboken kräver en senare version av 611</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3039,7 +3039,7 @@ Om filen inte existerar, skapa den med filrättigheten endast läsbar för ägar
     <message>
         <location line="+1"/>
         <source>Insufficient funds</source>
-        <translation type="unfinished">Otillräckligt med Namecoins</translation>
+        <translation type="unfinished">Otillräckligt med 611s</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3164,7 +3164,7 @@ Om filen inte existerar, skapa den med filrättigheten endast läsbar för ägar
     <message>
         <location line="+1"/>
         <source>SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
-        <translation type="unfinished">SSL-inställningar: (se Namecoin-wikin för SSL-setup instruktioner)</translation>
+        <translation type="unfinished">SSL-inställningar: (se 611-wikin för SSL-setup instruktioner)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3173,8 +3173,8 @@ Om filen inte existerar, skapa den med filrättigheten endast läsbar för ägar
     </message>
     <message>
         <location line="+1"/>
-        <source>Send command to -server or namecoind</source>
-        <translation type="unfinished">Skicka kommando till -server eller namecoind</translation>
+        <source>Send command to -server or 611d</source>
+        <translation type="unfinished">Skicka kommando till -server eller 611d</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3243,8 +3243,8 @@ Om filen inte existerar, skapa den med filrättigheten endast läsbar för ägar
     </message>
     <message>
         <location line="+1"/>
-        <source>Specify pid file (default: namecoind.pid)</source>
-        <translation type="unfinished">Ange pid fil (förvalt: namecoind.pid)</translation>
+        <source>Specify pid file (default: 611d.pid)</source>
+        <translation type="unfinished">Ange pid fil (förvalt: 611d.pid)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3338,8 +3338,8 @@ Om filen inte existerar, skapa den med filrättigheten endast läsbar för ägar
     </message>
     <message>
         <location line="+1"/>
-        <source>Wallet needed to be rewritten: restart Namecoin to complete</source>
-        <translation type="unfinished">Plånboken behöver skrivas om: Starta om Namecoin för att färdigställa</translation>
+        <source>Wallet needed to be rewritten: restart 611 to complete</source>
+        <translation type="unfinished">Plånboken behöver skrivas om: Starta om 611 för att färdigställa</translation>
     </message>
     <message>
         <location line="+1"/>

@@ -7,7 +7,7 @@
 #include "cryptopp/sha.h"
 #include "crypter.h"
 
-#include "namecoin.h"    // For DecodeNameScript in GetAmounts to correctly compute credit/debit
+#include "611.h"    // For DecodeNameScript in GetAmounts to correctly compute credit/debit
 
 using namespace std;
 
@@ -656,7 +656,7 @@ void CWallet::ResendWalletTransactions()
 bool
 CWalletTx::GetNameUpdate (int& nOut, vchType& nm, vchType& val) const
 {
-  if (nVersion != NAMECOIN_TX_VERSION)
+  if (nVersion != SIXELEVEN_TX_VERSION)
     return false;
 
   if (!nameTxDecoded)
@@ -1153,7 +1153,7 @@ string CWallet::SendMoneyPrepare(CScript scriptPubKey, int64 nValue, CWalletTx& 
     if (fAskFee && !uiInterface.ThreadSafeAskFee(nFeeRequired))
         return "ABORTED";
 #else
-    if (fAskFee && !ThreadSafeAskFee(nFeeRequired, "Namecoin", NULL))
+    if (fAskFee && !ThreadSafeAskFee(nFeeRequired, "611", NULL))
         return "ABORTED";
 #endif
 
@@ -1175,7 +1175,7 @@ string CWallet::SendMoneyToBitcoinAddress(string strAddress, int64 nValue, CWall
     // Parse bitcoin address
     CScript scriptPubKey;
     if (!scriptPubKey.SetBitcoinAddress(strAddress))
-        return _("Invalid namecoin address");
+        return _("Invalid 611 address");
 
     return SendMoney(scriptPubKey, nValue, wtxNew, fAskFee);
 }

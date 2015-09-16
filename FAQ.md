@@ -3,23 +3,23 @@ General
 
 **Q: What is the relationship of this project to Bitcoin?**
 
-**A:** The code is based on Bitcoin.  The block chain is separate, starting from a different genesis block and therefore creating a separate currency - Namecoins.  This approach was recommended during the BitDNS discussion on the forum.
+**A:** The code is based on Bitcoin.  The block chain is separate, starting from a different genesis block and therefore creating a separate currency - 611s.  This approach was recommended during the BitDNS discussion on the forum.
 
 **Q: How much does it cost to register a domain (a.k.a. a name)?**
 
-**A:** The cost includes a network fee and a transaction fee.  The fees are denominated in Namecoins (NC).  Initially, the network fee is 50 NC.  The network fee decreases 2x every 2 months, which means it will be less than one NC in a year.
+**A:** The cost includes a network fee and a transaction fee.  The fees are denominated in 611s (NC).  Initially, the network fee is 50 NC.  The network fee decreases 2x every 2 months, which means it will be less than one NC in a year.
 
-**Q: How do I obtain Namecoins?**
+**Q: How do I obtain 611s?**
 
-**A:** You have to get them by mining, in the usual Bitcoin way, or by obtaining them from someone else.  For example, you could find someone willing to sell NC for BTC.
+**A:** You have to get them by mining, in the usual Bitcoin way, or by obtaining them from someone else.  For example, you could find someone willing to sell SIL for BTC.
 
 **Q: Who gets the network fee?**
 
-**A:** The network fee Namecoins are destroyed by the transaction.  Nobody gets them.
+**A:** The network fee 611s are destroyed by the transaction.  Nobody gets them.
 
 **Q: Who gets the transaction fee?**
 
-**A:** The miners do, just like in Bitcoin.  Initially a reasonable transaction fee is either 0.00 or 0.01 NC.  You can choose this based on how fast you want your transaction to be processed.
+**A:** The miners do, just like in Bitcoin.  Initially a reasonable transaction fee is either 0.00 or 0.01 SIL.  You can choose this based on how fast you want your transaction to be processed.
 
 **Q: How long are names good for?**
 
@@ -27,16 +27,16 @@ General
 
 **Q: Do I have to pay renewal fees?**
 
-**A:** No, only Bitcoin-like transaction fees, currently 0.00 or 0.01 NC
+**A:** No, only Bitcoin-like transaction fees, currently 0.00 or 0.01 SIL
 
 Usage
 ===============
 
-**Q: How do I run Namecoin?**
+**Q: How do I run 611?**
 
-**A:** Currently you have to download and compile the software yourself.  You then run the namecoind executable.  Configuration is in ~/.namecoin/bitcoin.conf .
+**A:** Currently you have to download and compile the software yourself.  You then run the 611d executable.  Configuration is in ~/.611/bitcoin.conf .
 
-**Q: Can I run Namecoin and Bitcoin on the same machine?**
+**Q: Can I run 611 and Bitcoin on the same machine?**
 
 **A:** This is possible.  The two systems use different port numbers for client to client communication.  You have to choose a different RPC port for one of them, because they both default to 8332.
 
@@ -44,21 +44,21 @@ Usage
 
 **A:** You must have enough balance to pay the network fee and transaction fee.  Then do:
 
-`namecoind name_new <name>`
+`611d name_new <name>`
 
 This will output two values - a random number (short) and a transaction ID (longer).
 
 **wait 12 blocks**, then:
 
-`namecoind name_firstupdate <name> <random> <value>`
+`611d name_firstupdate <name> <random> <value>`
 
 **Q: How do I make my browser recognize the .bit top level domain?**
 
 **A:** _These are not yet implemented, but will be soon!_  Install the relevant plugin for your browser, or use a suitable proxy.
 
-**Q: I mined 50 NC.  Can I register a name now?**
+**Q: I mined 0.611 SIL. Can I register a name now?**
 
-**A:** You have to wait 120 blocks (normally 20 hours) for the NC to mature, in the usual Bitcoin fashion.
+**A:** You have to wait about 100 blocks (normally 5 to 8 hours) for the SIL to mature, in the usual Bitcoin fashion.
 
 **Q: Why is there a separate `name_new` step?**
 
@@ -66,7 +66,7 @@ This will output two values - a random number (short) and a transaction ID (long
 
 **Q: How do I list registered names?**
 
-**A:** Use `namecoind name_list` to see your own names, and `namecoind name_scan` for the global list.
+**A:** Use `611d name_list` to see your own names, and `611d name_scan` for the global list.
 
 **Q: How do I transfer a name?**
 
@@ -85,7 +85,7 @@ Design
 
 **Q: How are names represented?**
 
-**A:** Names and values are attached to special coins with a value of 0.01 NC .  Updates are performed by creating a transaction with the name's previous coin as input.
+**A:** Names and values are attached to special coins with a value of 0.01 SIL.  Updates are performed by creating a transaction with the name's previous coin as input.
 
 **Q: What if I spend that special coin by mistake?**
 
@@ -98,6 +98,6 @@ Mining
 
 **A:** Yes
 
-**Q: I have to choose whether to mine Namecoin or Bitcoin?**
+**Q: I have to choose whether to mine 611 or Bitcoin?**
 
 **A:** There is a plan to create a cross-miner that will be able to mine multiple chains with the same hash power.

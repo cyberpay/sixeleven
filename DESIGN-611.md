@@ -1,4 +1,4 @@
-# Namecoin Design
+# 611 Design
 
 ## Key Operations
 
@@ -14,7 +14,7 @@ The last is a normal bitcoin-like transaction that does not affect the name.
 
 A transaction can have a name operation associated with it.  An operation can reserve (name\_new), initialize (name\_firstupdate) or update (name\_update) a name/value pair.
 
-The name\_firstupdate transaction has a network fee.  The network fees represents namecoins (NC) that are destroyed.  This is in addition to the bitcoin-like miner transaction fees.
+The name\_firstupdate transaction has a network fee.  The network fees represents 611s (NC) that are destroyed.  This is in addition to the bitcoin-like miner transaction fees.
 
 ## Key Operations Detail
 
@@ -48,8 +48,8 @@ The purpose of the network fees is to slow down the initial gold-rush.
 A name operation transaction can be inserted in a block if the following validations pass:
 
 * normal bitcoin validations pass
-* if the transaction version does not indicate namecoin, no inputs can be namecoin outputs (i.e. have namecoin transaction id and have a namecoin script)
-* if the transaction version does not indicate namecoin, terminate with success
+* if the transaction version does not indicate 611, no inputs can be 611 outputs (i.e. have 611 transaction id and have a 611 script)
+* if the transaction version does not indicate 611, terminate with success
 * one of the outputs is >= the network fee of the block and has the script: OP\_RETURN (i.e. cannot be used as input, coins are lost)
 * if this is an name\_update, exactly one of the inputs is an name\_update or name\_firstupdate on this name and the difference in block numbers is at most 12000.  Also, no other inputs are name operations.
 * if this is a name\_firstupdate, exactly one of the inputs is a name\_new with block difference at least 12 but not more than 12000. No other inputs are name operations.

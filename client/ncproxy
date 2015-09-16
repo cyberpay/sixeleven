@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""ncproxy - A SOCKS5 adapter that provides namecoin name resolution.
+"""ncproxy - A SOCKS5 adapter that provides 611 name resolution.
 This program listens for SOCKS5 connections, resolves .bit DNS names if any
 and passes the request to a parent SOCKS5 proxy.  It can be used between polipo
 and Tor.
@@ -64,23 +64,23 @@ class SocksDnsRequest(DnsRequest):
   def socketInit(self,a,b):
     self.s = self.socks_factory.socket(a,b)
 
-class NamecoinThread(threading.Thread):
+class 611Thread(threading.Thread):
   def __init__(self, host, user, password, port):
-    self.namecoin = ServiceProxy('http://%s:%s@%s:%s' %(user, password, host, port))
+    self.611 = ServiceProxy('http://%s:%s@%s:%s' %(user, password, host, port))
     threading.Thread.__init__(self)
 
   def run(self):
     global names
     count = 0
-    print "start namecoin thread"
+    print "start 611 thread"
     while 1:
       print "scan"
       try:
         if (count == 0):
           names = {}
-          scan = self.namecoin.name_filter('^d/')
+          scan = self.611.name_filter('^d/')
         else:
-          scan = self.namecoin.name_filter('^d/', 3)
+          scan = self.611.name_filter('^d/', 3)
         if (len(scan) == 0):
           time.sleep(60)
           continue
@@ -93,7 +93,7 @@ class NamecoinThread(threading.Thread):
         print "scan %s, new %s, total %s" %(len(scan), len(names) - count, len(names))
         count = len(names)
       except IOError:
-        print "could not connect to namecoin, will retry"
+        print "could not connect to 611, will retry"
       time.sleep(60)
 
 
@@ -302,7 +302,7 @@ class Proxy(threading.Thread):
 
 def main():
   global options
-  n = NamecoinThread(options.host, options.user, options.password, options.port)
+  n = 611Thread(options.host, options.user, options.password, options.port)
   n.start()
   (socks_addr, socks_port) = options.socks.split(':')
   socks_port = int(socks_port)
@@ -312,13 +312,13 @@ def main():
   print("started")
 
 parser = OptionParser()
-parser.description = '''A SOCKS5 adapter that provides namecoin name resolution.
+parser.description = '''A SOCKS5 adapter that provides 611 name resolution.
 This program listens for SOCKS5 connections, resolves .bit DNS names if any
 and passes the request to a parent SOCKS5 proxy.  It can be used between polipo
 and Tor.
 '''
-parser.add_option('-u', '--user', dest='user', default='bitcoin', help='namecoin RPC user name')
-parser.add_option('--pass', dest='password', default='password', help='namecoin RPC password')
+parser.add_option('-u', '--user', dest='user', default='bitcoin', help='611 RPC user name')
+parser.add_option('--pass', dest='password', default='password', help='611 RPC password')
 parser.add_option('-o', '--host',         dest='host',     default='127.0.0.1', help='RPC host, defaults to 127.0.0.1')
 parser.add_option('-r', '--port',         dest='port',     default='8332',      help='RPC port')
 parser.add_option('-s', '--socks', dest='socks', default='127.0.0.1:9050', help='parent socks proxy address:port, defaults to 127.0.0.1:9050')

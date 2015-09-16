@@ -710,7 +710,7 @@ void FormatException(char* pszMessage, std::exception* pex, const char* pszThrea
     pszModule[0] = '\0';
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "namecoin";
+    const char* pszModule = "611";
 #endif
     if (pex)
         snprintf(pszMessage, 1000,
@@ -736,7 +736,7 @@ void PrintException(std::exception* pex, const char* pszThread)
     strMiscWarning = pszMessage;
 #ifdef GUI
     if (wxTheApp && !fDaemon)
-        MyMessageBox(pszMessage, "Namecoin", wxOK | wxICON_ERROR);
+        MyMessageBox(pszMessage, "611", wxOK | wxICON_ERROR);
 #endif
     throw;
 }
@@ -749,9 +749,9 @@ void ThreadOneMessageBox(string strMessage)
         return;
     fMessageBoxOpen = true;
 #ifdef GUI
-    uiInterface.ThreadSafeMessageBox(strMessage, "Namecoin", wxOK | wxICON_EXCLAMATION);
+    uiInterface.ThreadSafeMessageBox(strMessage, "611", wxOK | wxICON_EXCLAMATION);
 #else
-    ThreadSafeMessageBox(strMessage, "Namecoin", wxOK | wxICON_EXCLAMATION);
+    ThreadSafeMessageBox(strMessage, "611", wxOK | wxICON_EXCLAMATION);
 #endif
     fMessageBoxOpen = false;
 }
@@ -816,9 +816,9 @@ string GetDefaultDataDir()
 {
     string strSuffix = GetDefaultDataDirSuffix();
 
-    // Windows: C:\Documents and Settings\username\Application Data\Namecoin
-    // Mac: ~/Library/Application Support/Namecoin
-    // Unix: ~/.namecoin
+    // Windows: C:\Documents and Settings\username\Application Data\611
+    // Mac: ~/Library/Application Support/611
+    // Unix: ~/.611
 #ifdef __WXMSW__
     // Windows
     return MyGetSpecialFolderPath(CSIDL_APPDATA, true) + "\\" + strSuffix;
@@ -894,7 +894,7 @@ string GetConfigFile(string confFile)
 
 string GetConfigFile()
 {
-    string confFile = GetConfigFile("namecoin.conf");
+    string confFile = GetConfigFile("611.conf");
     if (!boost::filesystem::exists(confFile))
     {
         string altConfFile = GetConfigFile("bitcoin.conf");
@@ -930,7 +930,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 string GetPidFile()
 {
     namespace fs = boost::filesystem;
-    fs::path pathConfig(GetArg("-pid", "namecoind.pid"));
+    fs::path pathConfig(GetArg("-pid", "611d.pid"));
     if (!pathConfig.is_complete())
         pathConfig = fs::path(GetDataDir()) / pathConfig;
     return pathConfig.string();
@@ -1047,10 +1047,10 @@ void AddTimeData(unsigned int ip, int64 nTime)
                 if (!fMatch)
                 {
                     fDone = true;
-                    string strMessage = _("Warning: Please check that your computer's date and time are correct.  If your clock is wrong Namecoin will not work properly.");
+                    string strMessage = _("Warning: Please check that your computer's date and time are correct.  If your clock is wrong 611 will not work properly.");
                     strMiscWarning = strMessage;
                     printf("*** %s\n", strMessage.c_str());
-                    boost::thread(boost::bind(MyMessageBox, strMessage+" ", string("Namecoin"), wxOK | wxICON_EXCLAMATION, (wxWindow*)NULL, -1, -1));
+                    boost::thread(boost::bind(MyMessageBox, strMessage+" ", string("611"), wxOK | wxICON_EXCLAMATION, (wxWindow*)NULL, -1, -1));
                 }
             }
         }

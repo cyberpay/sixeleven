@@ -77,7 +77,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     prevBlocks(0)
 {
     resize(850, 550);
-    setWindowTitle(tr("Namecoin") + " - " + tr("Wallet"));
+    setWindowTitle(tr("611") + " - " + tr("Wallet"));
 #ifndef Q_OS_MAC
     if (!GetBoolArg("-testnet"))
     {
@@ -227,7 +227,7 @@ void BitcoinGUI::createActions()
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send coins"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a Namecoin address"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a 611 address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
@@ -255,7 +255,7 @@ void BitcoinGUI::createActions()
     tabGroup->addAction(addressBookAction);
 
     manageNamesAction = new QAction(QIcon(":/icons/bitcoin"), tr("&Manage Names"), this);
-    manageNamesAction->setStatusTip(tr("Manage names registered via Namecoin"));
+    manageNamesAction->setStatusTip(tr("Manage names registered via 611"));
     manageNamesAction->setToolTip(manageNamesAction->statusTip());
     manageNamesAction->setCheckable(true);
     manageNamesAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
@@ -278,14 +278,14 @@ void BitcoinGUI::createActions()
     quitAction->setStatusTip(tr("Quit application"));
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
-    aboutAction = new QAction(QIcon(":/icons/bitcoin"), tr("&About Namecoin"), this);
-    aboutAction->setStatusTip(tr("Show information about Namecoin"));
+    aboutAction = new QAction(QIcon(":/icons/bitcoin"), tr("&About 611"), this);
+    aboutAction->setStatusTip(tr("Show information about 611"));
     aboutAction->setMenuRole(QAction::AboutRole);
     aboutQtAction = new QAction(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"), tr("About &Qt"), this);
     aboutQtAction->setStatusTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
-    optionsAction->setStatusTip(tr("Modify configuration options for Namecoin"));
+    optionsAction->setStatusTip(tr("Modify configuration options for 611"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
     toggleHideAction = new QAction(QIcon(":/icons/bitcoin"), tr("&Show / Hide"), this);
     toggleHideAction->setStatusTip(tr("Show or hide the main Window"));
@@ -297,9 +297,9 @@ void BitcoinGUI::createActions()
     changePassphraseAction = new QAction(QIcon(":/icons/key"), tr("&Change Passphrase..."), this);
     changePassphraseAction->setStatusTip(tr("Change the passphrase used for wallet encryption"));
     signMessageAction = new QAction(QIcon(":/icons/edit"), tr("Sign &message..."), this);
-    signMessageAction->setStatusTip(tr("Sign messages with your Namecoin addresses to prove you own them"));
+    signMessageAction->setStatusTip(tr("Sign messages with your 611 addresses to prove you own them"));
     verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Namecoin addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified 611 addresses"));
 
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setStatusTip(tr("Export the data in the current tab to a file"));
@@ -451,12 +451,12 @@ void BitcoinGUI::createTrayIcon()
 
     if (!GetBoolArg("-testnet"))
     {
-        trayIcon->setToolTip(tr("Namecoin client"));
+        trayIcon->setToolTip(tr("611 client"));
         trayIcon->setIcon(QIcon(":/icons/toolbar"));
     }
     else
     {
-        trayIcon->setToolTip(tr("Namecoin client") + QString(" ") + tr("[testnet]"));
+        trayIcon->setToolTip(tr("611 client") + QString(" ") + tr("[testnet]"));
         trayIcon->setIcon(QIcon(":/icons/toolbar_testnet"));
     }
     trayIcon->show();
@@ -537,7 +537,7 @@ void BitcoinGUI::setNumConnections(int count)
     default: icon = ":/icons/connect_4"; break;
     }
     labelConnectionsIcon->setPixmap(QIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to Namecoin network", "", count));
+    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to 611 network", "", count));
 }
 
 void BitcoinGUI::setNumBlocks(int count, int nTotalBlocks)
@@ -642,7 +642,7 @@ void BitcoinGUI::setNumBlocks(int count, int nTotalBlocks)
 
 void BitcoinGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
 {
-    QString strTitle = tr("Namecoin") + " - ";
+    QString strTitle = tr("611") + " - ";
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;
@@ -864,7 +864,7 @@ void BitcoinGUI::dropEvent(QDropEvent *event)
         if (nValidUrisFound)
             gotoSendCoinsPage();
         else
-            message(tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid Namecoin address or malformed URI parameters."),
+            message(tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid 611 address or malformed URI parameters."),
                       CClientUIInterface::ICON_WARNING);
     }
 
@@ -892,7 +892,7 @@ void BitcoinGUI::handleURI(QString strURI)
         gotoSendCoinsPage();
     }
     else
-        message(tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid Namecoin address or malformed URI parameters."),
+        message(tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid 611 address or malformed URI parameters."),
                   CClientUIInterface::ICON_WARNING);
 }
 

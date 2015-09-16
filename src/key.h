@@ -47,7 +47,7 @@ public:
 typedef std::vector<unsigned char, secure_allocator<unsigned char> > CPrivKey;
 
 // Currently CSecret is encrypted privkey. In Bitcoin it is just 32-byte secret (not the whole key).
-// In current Namecoin implementation the whole privkey is encrypted, rather than the secret,
+// In current 611 implementation the whole privkey is encrypted, rather than the secret,
 // when encrypting the wallet.
 typedef std::vector<unsigned char, secure_allocator<unsigned char> > CSecret;
 
@@ -163,10 +163,8 @@ public:
 
     bool Verify(uint256 hash, const std::vector<unsigned char>& vchSig)
     {
-        if (vchSig.empty())
-            return false;
-
-        // adapted from https://github.com/bitcoin/bitcoin/commit/488ed32f2ada1d1dd108fc245d025c4d5f252783
+        if (vchSig.empty())  
+            return false;  
         // New versions of OpenSSL will reject non-canonical DER signatures. de/re-serialize first.
         unsigned char *norm_der = NULL;
         ECDSA_SIG *norm_sig = ECDSA_SIG_new();
@@ -198,7 +196,7 @@ public:
             return false;
         return key.Verify(hash, vchSig);
     }
-
+    
     void SetCompressedPubKey(bool fCompressed = true);
 
     // create a compact signature (65 bytes), which allows reconstructing the used public key
@@ -206,7 +204,7 @@ public:
     // The header byte: 0x1B = first key with even y, 0x1C = first key with odd y,
     //                  0x1D = second key with even y, 0x1E = second key with odd y
     bool SignCompact(uint256 hash, std::vector<unsigned char>& vchSig);
-
+    
     // reconstruct public key from a compact signature
     // This is only slightly more CPU intensive than just verifying it.
     // If this function succeeds, the recovered public key is guaranteed to be valid
@@ -214,7 +212,7 @@ public:
     bool SetCompactSignature(uint256 hash, const std::vector<unsigned char>& vchSig);
 
     // Verify a compact signature
-    bool VerifyCompact(uint256 hash, const std::vector<unsigned char>& vchSig);
+    bool VerifyCompact(uint256 hash, const std::vector<unsigned char>& vchSig); 
 };
 
 #endif

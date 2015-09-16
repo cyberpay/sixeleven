@@ -1,9 +1,9 @@
-#ifndef NAMECOIN_H
-#define NAMECOIN_H
+#ifndef SIXELEVEN_H
+#define SIXELEVEN_H
 
 #include "json/json_spirit.h"
 
-static const int NAMECOIN_TX_VERSION = 0x7100;
+static const int SIXELEVEN_TX_VERSION = 0x263;
 static const int64 MIN_AMOUNT = CENT;
 static const int MAX_NAME_LENGTH = 255;
 static const int MAX_VALUE_LENGTH = 1023;
@@ -54,4 +54,4 @@ int64 GetNetworkFee(int nHeight);
 /* Handle the name operation part of the RPC call createrawtransaction.  */
 void AddRawTxNameOperation(CTransaction& tx, const json_spirit::Object& obj);
 
-#endif // NAMECOIN_H
+#endif // SIXELEVEN_H

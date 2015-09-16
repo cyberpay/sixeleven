@@ -435,7 +435,7 @@ def run():
                               default='http://un:pw@127.0.0.1:8332/',
                               dest='parent_url')
 
-    aux_group = parser.add_argument_group('aux chain (e.g. namecoin) interface(s)')
+    aux_group = parser.add_argument_group('aux chain (e.g. 611) interface(s)')
     aux_group.add_argument('-x', '--aux-url', metavar='AUX_URL',
                            help='connect to the aux RPC at this address (default: http://un:pw@127.0.0.1:8342/)',
                            type=str, action='store', nargs='+',

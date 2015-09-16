@@ -8,7 +8,7 @@
 #include "../headers.h"
 #include "../wallet.h"
 #include "../base58.h"
-#include "../namecoin.h"
+#include "../611.h"
 #include "ui_interface.h"
 
 #include <QSet>
@@ -225,7 +225,7 @@ std::string WalletModel::nameFirstUpdateCreateTx(CWalletTx &wtx, const std::vect
     if (pnFeeRet)
         *pnFeeRet = 0;
 
-    wtx.nVersion = NAMECOIN_TX_VERSION;
+    wtx.nVersion = SIXELEVEN_TX_VERSION;
     
     if (mapNamePending.count(vchName) && mapNamePending[vchName].size())
     {
@@ -543,7 +543,7 @@ WalletModel::NameNewReturn WalletModel::nameNew(const QString &name)
     ret.vchName = std::vector<unsigned char>(strName.begin(), strName.end());
 
     CWalletTx wtx;
-    wtx.nVersion = NAMECOIN_TX_VERSION;
+    wtx.nVersion = SIXELEVEN_TX_VERSION;
 
     uint64 rand = GetRand((uint64)-1);
     std::vector<unsigned char> vchRand = CBigNum(rand).getvch();
@@ -686,7 +686,7 @@ QString WalletModel::nameUpdate(const QString &name, const QString &data, const 
     std::vector<unsigned char> vchValue(strData.begin(), strData.end());
 
     CWalletTx wtx;
-    wtx.nVersion = NAMECOIN_TX_VERSION;
+    wtx.nVersion = SIXELEVEN_TX_VERSION;
     CScript scriptPubKeyOrig;
     
     if (transferToAddress != "")
@@ -695,7 +695,7 @@ QString WalletModel::nameUpdate(const QString &name, const QString &data, const 
         uint160 hash160;
         bool isValid = AddressToHash160(strAddress, hash160);
         if (!isValid)
-            return tr("Invalid Namecoin address");
+            return tr("Invalid 611 address");
         scriptPubKeyOrig.SetBitcoinAddress(strAddress);
     }
     else

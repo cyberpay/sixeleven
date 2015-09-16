@@ -50,11 +50,11 @@ static const int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
 
 static const int64 COIN = 100000000;
 static const int64 CENT = 1000000;
-static const int64 MIN_TX_FEE = 500000;
-static const int64 MIN_RELAY_TX_FEE = MIN_TX_FEE/5;
-static const int64 MAX_MONEY = 21000000 * COIN;
+static const int64 MIN_TX_FEE =  6110000;
+static const int64 MIN_RELAY_TX_FEE = MIN_TX_FEE/10;
+static const int64 MAX_MONEY = 611000 * COIN;
 inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
-static const int COINBASE_MATURITY = 100;
+static const int COINBASE_MATURITY = 80;
 
 // -paytxfee default
 static const int64 DEFAULT_TRANSACTION_FEE = MIN_TX_FEE;
@@ -657,7 +657,7 @@ public:
         }
 
         /* The old rule was to require a "base fee" for any output less than
-           0.01 NMC.  This rule is no longer enforced (instead, we disallow
+           0.01 611.  This rule is no longer enforced (instead, we disallow
            spam outputs right away in AcceptToMemoryPool similarly to
            what Bitcoin does).  When creating the tx, still attach the
            fee because we want the tx to be relayed by old clients as well.  */

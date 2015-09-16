@@ -1,4 +1,4 @@
-IDI_ICON1 ICON DISCARDABLE "icons/bitcoin.ico"
+IDI_ICON1 ICON DISCARDABLE "icons/611.ico"
 
 #include <windows.h>             // needed for VERSIONINFO
 
@@ -33,14 +33,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Namecoin"
-            VALUE "FileDescription",    "Namecoin-Qt (OSS GUI client for Namecoin)"
+            VALUE "CompanyName",        "611"
+            VALUE "FileDescription",    "611-Qt (OSS GUI client for 611)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "namecoin-qt"
-            VALUE "LegalCopyright",     "2009-2013 The Bitcoin and Namecoin developers"
+            VALUE "InternalName",       "611-qt"
+            VALUE "LegalCopyright",     "2009-2015 The Bitcoin and SixEleven developers"
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "namecoin-qt.exe"
-            VALUE "ProductName",        "Namecoin-Qt"
+            VALUE "OriginalFilename",   "611-qt.exe"
+            VALUE "ProductName",        "611-Qt"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

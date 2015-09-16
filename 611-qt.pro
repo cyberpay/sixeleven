@@ -1,13 +1,14 @@
 TEMPLATE = app
-TARGET = namecoin-qt
-macx:TARGET = "Namecoin-Qt"
-VERSION = 0.3.80
+TARGET = 611-qt
+macx:TARGET = "611-Qt"
+VERSION = 0.6.11
 INCLUDEPATH += src src/json src/qt
 QT += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 DEFINES += GUI QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
-CONFIG += thread
+#CONFIG += thread
+CONFIG += x86
 
 DEFINES += NOPCH FOURWAYSSE2 USE_SSL
 
@@ -26,12 +27,22 @@ MOC_DIR = build
 UI_DIR = build
 
 # use: qmake "RELEASE=1"
-contains(RELEASE, 1) {
-    # Mac: compile for maximum compatibility (10.5, 32-bit)
-    macx:QMAKE_CXXFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
-    macx:QMAKE_CFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
-    macx:QMAKE_OBJECTIVE_CFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
+# contains(RELEASE, 1) {
+#     # Mac: compile for maximum compatibility (10.5, 32-bit)
+#     macx:QMAKE_CXXFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
+#     macx:QMAKE_CFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
+#     macx:QMAKE_OBJECTIVE_CFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
+# 
+#     !win32:!macx {
+#         # Linux: static link and extra security (see: https://wiki.debian.org/Hardening)
+#         LIBS += -Wl,-Bstatic -Wl,-z,relro -Wl,-z,now
+#     }
+# }
 
+# use: qmake "RELEASE=1"
+contains(RELEASE, 1) {
+    # Mac: compile for maximum compatibility (10.6, 64-bit)
+    macx:QMAKE_MACOSX_DEPLOYMENT_TARGET=10.6
     !win32:!macx {
         # Linux: static link and extra security (see: https://wiki.debian.org/Hardening)
         LIBS += -Wl,-Bstatic -Wl,-z,relro -Wl,-z,now
@@ -60,6 +71,30 @@ contains(USE_QRCODE, 1) {
     LIBS += -lqrencode
 }
 
+macx: {
+    QMAKE_CFLAGS += -stdlib=libstdc++
+    QMAKE_CXXFLAGS += -stdlib=libstdc++
+    QMAKE_LFLAGS += -stdlib=libstdc++
+    MINIUPNPC_INCLUDE_PATH = /opt/local/include
+    MINIUPNPC_LIB_PATH = /opt/local/lib
+}
+
+win32: {
+    QMAKE_CFLAGS += -stdlib=libstdc++
+    QMAKE_CXXFLAGS += -DMINIUPNP_STATICLIB
+	# QMAKE_CXXFLAGS += -I../../deps/libpng-1.6.18
+    # QMAKE_LFLAGS += -L../../deps/libpng-1.6.18/.lib
+	QMAKE_LFLAGS += -static -static-libgcc -static-libstdc++
+    MINIUPNPC_INCLUDE_PATH = ../../deps/miniupnpc-1.9.20150206
+    MINIUPNPC_LIB_PATH = ../../deps/miniupnpc-1.9.20150206/miniupnpc
+	BDB_INCLUDE_PATH = ../../deps/db-4.8.30.NC/build_unix
+	BDB_LIB_PATH = ../../deps/db-4.8.30.NC/build_unix
+	OPENSSL_INCLUDE_PATH = ../../deps/openssl-1.0.2d/include
+	OPENSSL_LIB_PATH = ../../deps/openssl-1.0.2d
+	BOOST_INCLUDE_PATH = ../../deps/boost_1_59_0
+	BOOST_LIB_PATH = ../../deps/boost_1_59_0/stage/lib
+}
+
 # use: qmake "USE_UPNP=1" ( enabled by default; default)
 #  or: qmake "USE_UPNP=0" (disabled by default)
 #  or: qmake "USE_UPNP=-" (not supported)
@@ -84,7 +119,7 @@ contains(USE_DBUS, 1) {
     QT += dbus
 }
 
-# Namecoind does not support IPv6
+# 611d does not support IPv6
 isEmpty(USE_IPV6) {
     USE_IPV6=-
 }
@@ -142,7 +177,7 @@ SOURCES += \
     src/init.cpp \
     src/cryptopp/sha.cpp \
     src/cryptopp/cpu.cpp \
-    src/namecoin.cpp
+    src/611.cpp
 
 HEADERS += \
     src/qt/netbase.h \
@@ -291,7 +326,7 @@ QMAKE_EXTRA_COMPILERS += TSQM
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
     macx:BOOST_LIB_SUFFIX = -mt
-    win32:BOOST_LIB_SUFFIX = -mgw46-mt-1_50
+    win32:BOOST_LIB_SUFFIX = -mgw49-mt-s-1_59
 }
 
 isEmpty(BOOST_THREAD_LIB_SUFFIX) {
@@ -310,12 +345,23 @@ isEmpty(BDB_INCLUDE_PATH) {
     macx:BDB_INCLUDE_PATH = /opt/local/include/db48
 }
 
+# compile workaround mac os x
+macx:BOOST_LIB_PATH = /opt/boost-159/lib
+macx:BOOST_INCLUDE_PATH = /opt/boost-159/include
+ 
 isEmpty(BOOST_LIB_PATH) {
     macx:BOOST_LIB_PATH = /opt/local/lib
 }
 
 isEmpty(BOOST_INCLUDE_PATH) {
     macx:BOOST_INCLUDE_PATH = /opt/local/include
+}
+
+# platform specific defaults, if not overridden on command line
+isEmpty(BOOST_LIB_SUFFIX) {
+#    macx:BOOST_LIB_SUFFIX = -mt.a
+#    macx:BOOST_LIB_SUFFIX = .a
+#    win32:BOOST_LIB_SUFFIX = -mgw44-mt-s-1_50
 }
 
 win32:DEFINES += WIN32 __WXMSW__
@@ -339,15 +385,67 @@ win32:!contains(MINGW_THREAD_BUGFIX, 0) {
     DEFINES += _FILE_OFFSET_BITS=64
 }
 
-macx:HEADERS += src/qt/macdockiconhandler.h
-macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
-macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
-macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
-macx:ICON = src/qt/res/icons/bitcoin.icns
-macx:QMAKE_CFLAGS_THREAD += -pthread
-macx:QMAKE_LFLAGS_THREAD += -pthread
-macx:QMAKE_CXXFLAGS_THREAD += -pthread
-macx:QMAKE_INFO_PLIST = share/qt/Info.plist
+# macx:HEADERS += src/qt/macdockiconhandler.h
+# macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
+# macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
+# macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
+# macx:ICON = src/qt/res/icons/bitcoin.icns
+# macx:QMAKE_CFLAGS_THREAD += -pthread
+# macx:QMAKE_LFLAGS_THREAD += -pthread
+# macx:QMAKE_CXXFLAGS_THREAD += -pthread
+# macx:QMAKE_INFO_PLIST = share/qt/Info.plist
+
+macx: {
+
+    isEmpty(DEPSDIR) {
+
+        check_dir = /usr/local/Cellar
+        exists($$check_dir) {
+            DEPSDIR = /usr/local
+        }
+
+        !exists($$check_dir) {
+            DEPSDIR = /opt/local
+        }
+    }
+
+    isEmpty(BOOST_LIB_PATH) {
+        BOOST_LIB_PATH = $$DEPSDIR/lib
+    }
+
+    isEmpty(BOOST_INCLUDE_PATH) {
+        BOOST_INCLUDE_PATH = $$DEPSDIR/include
+    }
+
+    isEmpty(BDB_LIB_PATH) {
+        BDB_LIB_PATH = $$DEPSDIR/lib
+    }
+
+    isEmpty(BDB_INCLUDE_PATH) {
+        BDB_INCLUDE_PATH = $$DEPSDIR/include
+    }
+
+    HEADERS += src/qt/macdockiconhandler.h src/qt/macnotificationhandler.h
+    OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhandler.mm
+    LIBS += -framework Foundation -framework ApplicationServices -framework AppKit -framework CoreServices 
+#        $$BOOST_LIB_PATH/libboost_system.a \
+#        $$BOOST_LIB_PATH/libboost_filesystem.a \
+#        $$BOOST_LIB_PATH/libboost_program_options.a \
+#        $$BOOST_LIB_PATH/libboost_thread.a \
+#        $$BOOST_LIB_PATH/libboost_chrono.a 
+#        $$BDB_LIB_PATH/libdb_cxx.a
+
+    DEFINES += MAC_OSX MSG_NOSIGNAL=0
+    # osx 10.9 has changed the stdlib default to libc++. To prevent some link error, you may need to use libstdc++
+    # QMAKE_CXXFLAGS += -stdlib=libstdc++
+
+
+    ICON = src/qt/res/icons/611.icns
+    TARGET = "611-Qt"
+
+    QMAKE_CFLAGS_THREAD += -pthread
+    QMAKE_CXXFLAGS_THREAD += -pthread
+}
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
 INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
@@ -366,3 +464,6 @@ contains(RELEASE, 1) {
 }
 
 system($$QMAKE_LRELEASE $$_PRO_FILE_)
+
+OBJECTIVE_SOURCES += \
+    src/qt/macnotificationhandler.mm

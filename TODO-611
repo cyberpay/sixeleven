@@ -5,7 +5,7 @@
   * other conflicts: update on expired name, firstupdate on expired name_new
 * d7cc9e949d invalid number of args
 * blockexplorer
-* IsMine hook to ensure modified clients don't spend namecoins by mistake as regular coins in case of future changes to IsMine
+* IsMine hook to ensure modified clients don't spend 611s by mistake as regular coins in case of future changes to IsMine
 * listtransactions improved decode
 * auto-send firstupdate after 6 blocks with persistent name/rand
 * review threading

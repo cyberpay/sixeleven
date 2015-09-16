@@ -164,7 +164,7 @@ bool ClientModel::isReleaseVersion() const
 
 QString ClientModel::clientName() const
 {
-    const std::string CLIENT_NAME = "Namecoin-Qt";
+    const std::string CLIENT_NAME = "611-Qt";
     return QString::fromStdString(CLIENT_NAME);
 }
 

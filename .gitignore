@@ -3,10 +3,10 @@
 *.pyc
 .*.swp
 *.*~*
-namecoin-qt
-namecoin-qt.exe
-src/namecoind
-src/namecoind.exe
+611-qt
+611-qt.exe
+src/611d
+src/611d.exe
 
 # Stuff created by the Qt build system.
 qrc_bitcoin.cpp

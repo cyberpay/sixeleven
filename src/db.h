@@ -374,7 +374,7 @@ public:
 
 
 /**
- * Name index.  Non-inline implementation code is in namecoin.cpp, but the
+ * Name index.  Non-inline implementation code is in 611.cpp, but the
  * class is declared here because it will be used for the "wrapper" database
  * set class below and in general makes sense here.
  */

@@ -35,7 +35,7 @@ class CDataStream;
 class CAutoFile;
 static const unsigned int MAX_SIZE = 0x02000000;
 
-static const int VERSION = 38000;
+static const int VERSION = 61100;
 static const char* pszSubVer = "";
 static const bool VERSION_IS_BETA = false;
 
@@ -926,7 +926,8 @@ public:
     void clear()                                     { vch.clear(); nReadPos = 0; }
     iterator insert(iterator it, const char& x=char()) { return vch.insert(it, x); }
     void insert(iterator it, size_type n, const char& x) { vch.insert(it, n, x); }
-#ifdef __APPLE__
+// #ifdef __APPLE__
+#ifndef MAC_OSX
     void insert(iterator it, const_iterator first, const_iterator last)
     {
         if (it == vch.begin() + nReadPos && last - first <= nReadPos)
@@ -938,7 +939,8 @@ public:
         else
             vch.insert(it, first, last);
     }
-#else
+// #else
+#endif
     void insert(iterator it, std::vector<char>::const_iterator first, std::vector<char>::const_iterator last)
     {
         if (it == vch.begin() + nReadPos && last - first <= nReadPos)
@@ -950,7 +952,7 @@ public:
         else
             vch.insert(it, first, last);
     }
-#endif
+// #endif
 #if !defined(_MSC_VER) || _MSC_VER >= 1300
     void insert(iterator it, const char* first, const char* last)
     {

@@ -150,7 +150,7 @@ CDB::Close ()
       /* Flush database activity from memory pool to disk log.
          wallet file is always flushed, the other files only every couple
          of minutes.
-         Note: Namecoin has more .dat files than Bitcoin.  */
+         Note: 611 has more .dat files than Bitcoin.  */
 
       unsigned int nMinutes = 2;
       if (strFile == walletPath)

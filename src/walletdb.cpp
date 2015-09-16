@@ -10,7 +10,7 @@
 #include <boost/filesystem.hpp>
 
 #ifdef GUI
-#include "namecoin.h"
+#include "611.h"
 extern std::map<std::vector<unsigned char>, PreparedNameFirstUpdate> mapMyNameFirstUpdate;
 extern std::map<uint160, std::vector<unsigned char> > mapMyNameHashes;   // Name for name_new hash (to show name in transaction list)
 #endif

@@ -7,7 +7,7 @@
 #include "guiutil.h"
 #include "../headers.h"
 #include "../wallet.h"
-#include "../namecoin.h"
+#include "../611.h"
 #include "guiconstants.h"
 #include "ui_interface.h"
 #include "configurenamedialog.h"
@@ -250,7 +250,7 @@ void ManageNamesPage::on_submitNameButton_clicked()
 
     QString msg;
     if (name.startsWith("d/"))
-        msg = tr("Are you sure you want to register domain name %1, which corresponds to domain %2?").arg(GUIUtil::HtmlEscape(name)).arg(GUIUtil::HtmlEscape(name.mid(2) + ".bit"));
+        msg = tr("Are you sure you want to register domain name %1, which corresponds to domain %2?").arg(GUIUtil::HtmlEscape(name)).arg(GUIUtil::HtmlEscape(name.mid(2) + ".611.to"));
     else
         msg = tr("Are you sure you want to register non-domain name %1?").arg(GUIUtil::HtmlEscape(name));
     msg += "<br><br>" + tr("This will issue both a name_new and a postponed name_firstupdate. Let the program run for three hours to make sure the process can finish.");

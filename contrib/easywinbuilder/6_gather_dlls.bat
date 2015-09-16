@@ -3,13 +3,13 @@
 @set QTPATHF=%QTPATH:/=\%
 @set MINGWQTPATHF=%MINGWQTPATH:/=\%
 
-@echo namecoind DLLs
+@echo 611d DLLs
 copy %MINGWQTPATHF%\libgcc_s_dw2-1.dll %ROOTPATH%\src\
 copy "%MINGWQTPATHF%\libstdc++-6.dll" %ROOTPATH%\src\
 
 copy %QTPATHF%\libwinpthread-1.dll %ROOTPATH%\src\
 
-@echo namecoin-qt DLLs
+@echo 611-qt DLLs
 copy %MINGWQTPATHF%\libgcc_s_dw2-1.dll %ROOTPATH%\release\
 copy "%MINGWQTPATHF%\libstdc++-6.dll" %ROOTPATH%\release\
 

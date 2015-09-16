@@ -7,7 +7,7 @@ if [ ! -d $EWBLIBS ]; then
 fi
 
 # echo Downloading source...
-# wget --no-check-certificate -N "https://github.com/phelixbtc/namecoin-qt/archive/easywinbuilder.tar.gz" -O "source.tar.gz"
+# wget --no-check-certificate -N "https://github.com/phelixbtc/611-qt/archive/easywinbuilder.tar.gz" -O "source.tar.gz"
 # echo
 
 echo Downloading dependencies...
