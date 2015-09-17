@@ -58,6 +58,8 @@ contains(RELEASE, 1) {
 }
 # for extra security (see: https://wiki.debian.org/Hardening): this flag is GCC compiler-specific
 QMAKE_CXXFLAGS *= -D_FORTIFY_SOURCE=2
+# fix multiple definition problem with Win32 and Posix threads 
+win32:QMAKE_LFLAGS *= -DBOOST_THREAD_POSIX
 # for extra security on Windows: enable ASLR and DEP via GCC linker flags
 win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat
 # on Windows: enable GCC large address aware linker flag
