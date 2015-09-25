@@ -823,10 +823,13 @@ uint256 static GetOrphanRoot(const CBlock* pblock)
 
 int64 GetBlockValue(int nHeight, int64 nFees)
 {
-    // on average half the coin value every 2^18 blocks
-    int64 nSubsidy = 0.611 * COIN / (1 + (nHeight >> 18)  + ((nHeight % 262144)/262144));
+    // default block value
+    int64 nSubsidy = 0.611 * COIN;
+    // on average half the coin value every 2^18 or 262144 blocks
+    nSubsidy = nSubsidy >> (nHeight >> 18);
+    nSubsidy -= (nSubsidy >> 19) * (nHeight % 262144);
     // 
-    if(nHeight < 10080)
+    if(nHeight < 10110)
     { 
        nSubsidy = 0.611 * COIN;
     }

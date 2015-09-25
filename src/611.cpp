@@ -214,10 +214,11 @@ int64 GetNetworkFee(int nHeight)
 //     return nRes;
     // the standard network fee is 6.11 cent
        int64 nStart = 611 * CENT / 100;
-    // it will decrease by factor two every 2^18  blocks
-       int64 nNetFee = nStart / (1 + (nHeight >> 18)  + ((nHeight % 262144)/262144));
-    // the fee is fixed for early developers 
-       if (nHeight <= 10800)
+    // it will decrease by factor two every 2^18 or 262144 blocks
+       int64 nNetFee = nStart >> (nHeight >> 18);
+       nNetFee -= (nNetFee >> 19) * (nHeight % 262144);
+    // but is was fixed for the very early developers 
+       if (nHeight <= 10110)
            nNetFee = 611 * CENT / 100;
        if (nHeight <= 2880)
            nNetFee = 611 * CENT / 1000;
