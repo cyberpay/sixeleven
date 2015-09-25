@@ -182,14 +182,14 @@ string stringFromVch(const vector<unsigned char> &vch) {
 }
 
 // Names registered with 611 should be valid at least 365 days.
-// Increase expiration to 180000 gradually starting at block 18000.
+// Increase expiration to 108000 gradually starting at block 18000.
 // Use for validation purposes and pass the chain height.
 int GetExpirationDepth(int nHeight) {
     if (nHeight < 18000)
         return 18000;
-    if (nHeight < 198000)
+    if (nHeight < 126000)
         return nHeight - 18000;
-    return 180000;
+    return 108000;
 }
 
 // For display purposes, pass the name height.
