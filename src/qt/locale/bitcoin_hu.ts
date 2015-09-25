@@ -1266,7 +1266,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     <message>
         <location line="+6"/>
         <source>Optional transaction fee per kB that helps make sure your transactions are processed quickly. Most transactions are 1 kB. Fee 0.01 recommended.</source>
-        <translation>Opcionális, kB-onkénti tranzakciós díj a tranzakcióid minél gyorsabb feldolgozásának elősegítésére.  A legtöbb tranzakció 1 kB-os.  0,01 NMC ajánlott.</translation>
+        <translation>Opcionális, kB-onkénti tranzakciós díj a tranzakcióid minél gyorsabb feldolgozásának elősegítésére.  A legtöbb tranzakció 1 kB-os.  0,01 SIL ajánlott.</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -1785,8 +1785,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+10"/>
-        <source>... NMC</source>
-        <translation>... NMC</translation>
+        <source>... SIL</source>
+        <translation>... SIL</translation>
     </message>
     <message>
         <location line="+31"/>

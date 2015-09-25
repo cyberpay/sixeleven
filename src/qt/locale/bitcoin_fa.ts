@@ -1780,7 +1780,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+10"/>
-        <source>... NMC</source>
+        <source>... SIL</source>
         <translation>123.456 بتس</translation>
     </message>
     <message>

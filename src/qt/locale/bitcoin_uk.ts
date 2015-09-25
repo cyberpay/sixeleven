@@ -236,7 +236,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+1"/>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SIXELEVENS&lt;/b&gt;!</source>
-        <translation>УВАГА: Якщо ви зашифруєте гаманець і забудете пароль, ви &lt;b&gt;ВТРАТИТЕ ВСІ СВОЇ NMC&lt;/b&gt;!</translation>
+        <translation>УВАГА: Якщо ви зашифруєте гаманець і забудете пароль, ви &lt;b&gt;ВТРАТИТЕ ВСІ СВОЇ SIL&lt;/b&gt;!</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -263,7 +263,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="-56"/>
         <source>611 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your 611s from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished">611-клієнт буде закрито для завершення процесу шифрування. Пам’ятайте, що шифрування гаманця не може повністю захистити ваші NMC від кражі, у випадку якщо ваш комп’ютер буде інфіковано шкідливими програмами.</translation>
+        <translation type="unfinished">611-клієнт буде закрито для завершення процесу шифрування. Пам’ятайте, що шифрування гаманця не може повністю захистити ваші SIL від кражі, у випадку якщо ваш комп’ютер буде інфіковано шкідливими програмами.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1794,8 +1794,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+10"/>
-        <source>... NMC</source>
-        <translation>... NMC</translation>
+        <source>... SIL</source>
+        <translation>... SIL</translation>
     </message>
     <message>
         <location line="+31"/>

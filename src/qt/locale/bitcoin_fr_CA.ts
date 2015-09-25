@@ -1785,7 +1785,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+10"/>
-        <source>... NMC</source>
+        <source>... SIL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

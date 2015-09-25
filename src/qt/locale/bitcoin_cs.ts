@@ -1812,8 +1812,8 @@ a po ní zařadí do fronty transakci name_firstupdate.</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>... NMC</source>
-        <translation>... NMC</translation>
+        <source>... SIL</source>
+        <translation>... SIL</translation>
     </message>
     <message>
         <location line="+31"/>

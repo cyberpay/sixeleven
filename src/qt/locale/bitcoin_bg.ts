@@ -1266,7 +1266,7 @@ to the network and creates a pending name_firstupdate transaction.</source>
     <message>
         <location line="+6"/>
         <source>Optional transaction fee per kB that helps make sure your transactions are processed quickly. Most transactions are 1 kB. Fee 0.01 recommended.</source>
-        <translation>Такса за транзакция на kB. Подпомага участниците в мрежата, които верифицират транзакции (miners). По-висока стойност би трябвало да ускори обработката на транзакции. Повечето транзакции са около 1 kB. Препоръчителна стойност - 0.01 NMC.</translation>
+        <translation>Такса за транзакция на kB. Подпомага участниците в мрежата, които верифицират транзакции (miners). По-висока стойност би трябвало да ускори обработката на транзакции. Повечето транзакции са около 1 kB. Препоръчителна стойност - 0.01 SIL.</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -1785,8 +1785,8 @@ to the network and creates a pending name_firstupdate transaction.</source>
     </message>
     <message>
         <location line="+10"/>
-        <source>... NMC</source>
-        <translation>... NMC</translation>
+        <source>... SIL</source>
+        <translation>... SIL</translation>
     </message>
     <message>
         <location line="+31"/>
