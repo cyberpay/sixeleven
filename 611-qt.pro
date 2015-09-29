@@ -74,9 +74,9 @@ contains(USE_QRCODE, 1) {
 }
 
 macx: {
-    QMAKE_CFLAGS += -stdlib=libstdc++
-    QMAKE_CXXFLAGS += -stdlib=libstdc++
-    QMAKE_LFLAGS += -stdlib=libstdc++
+    QMAKE_CFLAGS += -stdlib=libc++
+    QMAKE_CXXFLAGS += -stdlib=libc++
+    QMAKE_LFLAGS += -stdlib=libc++
     MINIUPNPC_INCLUDE_PATH = /opt/local/include
     MINIUPNPC_LIB_PATH = /opt/local/lib
 }

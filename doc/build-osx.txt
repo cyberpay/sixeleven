@@ -10,12 +10,12 @@ port install miniupnpc db48 automake autoconf cmake gcc5 icu
   (b) boostrap with wide support for i386 and x86_64 with Mac OS X down to Lion 
      ./bootstrap.sh --prefix=/opt/boost-159 cxxflags="-arch i386 -arch x86_64" \
          address-model=32_64 threading=multi macos-version=10.7 stage
-  (b) compile boost against libstdc++
+  (b) compile boost against libc++
      ./b2 threading=multi link=static runtime-link=static \
-         cxxflags="-stdlib=libstdc++" linkflags="-stdlib=libstdc++"
+         cxxflags="-stdlib=libc++" linkflags="-stdlib=libc++"
   (c) install to /opt/boost-159
      sudo ./b2 threading=multi link=static runtime-link=static \
-         cxxflags="-stdlib=libstdc++" linkflags="-stdlib=libstdc++" \
+         cxxflags="-stdlib=libc++" linkflags="-stdlib=libc++" \
          install 
 
 (3) download Qt 5.4.x (I did use Qt 5.4.2); newer version may work...
