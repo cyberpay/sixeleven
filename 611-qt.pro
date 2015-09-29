@@ -41,8 +41,8 @@ UI_DIR = build
 
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
-    # Mac: compile for maximum compatibility (10.6, 64-bit)
-    macx:QMAKE_MACOSX_DEPLOYMENT_TARGET=10.6
+    # Mac: compile for maximum compatibility (10.7, 64-bit)
+    macx:QMAKE_MACOSX_DEPLOYMENT_TARGET=10.7
     !win32:!macx {
         # Linux: static link and extra security (see: https://wiki.debian.org/Hardening)
         LIBS += -Wl,-Bstatic -Wl,-z,relro -Wl,-z,now
@@ -327,7 +327,7 @@ QMAKE_EXTRA_COMPILERS += TSQM
 
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
-    macx:BOOST_LIB_SUFFIX = -mt
+    # macx:BOOST_LIB_SUFFIX = -mt
     win32:BOOST_LIB_SUFFIX = -mgw49-mt-s-1_59
 }
 
