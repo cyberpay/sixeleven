@@ -2737,7 +2737,7 @@ unsigned short GetDefaultPort()
 }
 
 unsigned int pnSeed[] = { 0x58cea445, 0x2b562f4e, 0x291f20b2, 0 };
-const char *strDNSSeed[] = { NULL };
+const char *strDNSSeed[] = { "dnsseed.611.to" };
 
 string GetDefaultDataDirSuffix() {
 #ifdef __WXMSW__
