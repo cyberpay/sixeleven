@@ -2707,22 +2707,22 @@ int C611Hooks::LockinHeight()
 
 bool C611Hooks::Lockin(int nHeight, uint256 hash)
 {
-//    if (!fTestNet)
-//        if ((nHeight == 2016 && hash != uint256("0x0000000000660bad0d9fbde55ba7ee14ddf766ed5f527e3fbca523ac11460b92")) ||
-//                (nHeight ==   4032 && hash != uint256("0x0000000000493b5696ad482deb79da835fe2385304b841beef1938655ddbc411")) ||
-//                (nHeight ==   6048 && hash != uint256("0x000000000027939a2e1d8bb63f36c47da858e56d570f143e67e85068943470c9")) ||
-//                (nHeight ==   8064 && hash != uint256("0x000000000003a01f708da7396e54d081701ea406ed163e519589717d8b7c95a5")) ||
-//                (nHeight ==  10080 && hash != uint256("0x00000000000fed3899f818b2228b4f01b9a0a7eeee907abd172852df71c64b06")) ||
-//                (nHeight ==  12096 && hash != uint256("0x0000000000006c06988ff361f124314f9f4bb45b6997d90a7ee4cedf434c670f")) ||
-//                (nHeight ==  14112 && hash != uint256("0x00000000000045d95e0588c47c17d593c7b5cb4fb1e56213d1b3843c1773df2b")) ||
-//                (nHeight ==  16128 && hash != uint256("0x000000000001d9964f9483f9096cf9d6c6c2886ed1e5dec95ad2aeec3ce72fa9")) ||
+    if (!fTestNet)
+        if ((nHeight == 2016 && hash != uint256("0x0000000491a32a0f19ab047b18a22f369351c6c4304dbf1750aafbe621d0516b")) ||
+                (nHeight ==   4032 && hash != uint256("0x0000000455f87fbc8fd78530f0ccd1db72588d6d19b737f75a2b6ab70a234758")) ||
+                (nHeight ==   6048 && hash != uint256("0x000000012508665fe92f85a0da2aea314bf554cf3553c29bfef63dd1993b2510")) ||
+                (nHeight ==   8064 && hash != uint256("0x00000002348b01281b5dd4f7b88e14f9708e1157cab21e5dfd40569f9b6e739f")) ||
+                (nHeight ==  10080 && hash != uint256("0x00000006d586b7f3674ce14c2aa4db12c8afdc7a1a9c7d9f3c18b6b990c9cc61")) ||
+                (nHeight ==  12096 && hash != uint256("0x000000074ac40bc05d4fe524053ca4f69ae48bed59b68f9baff254d9c667310d")) ||
+                (nHeight ==  14112 && hash != uint256("0x000000054e65e10f90d55a3f9071eecdabfe4106c196f7828f01d3796f42be34")))
+//                (nHeight ==  16128 && hash != uint256("0x000000000aeee824226cb18a76462413179d1b00ac2d0b91b06c660b0323978b")) ||
 //                (nHeight ==  18940 && hash != uint256("0x00000000000087f7fc0c8085217503ba86f796fa4984f7e5a08b6c4c12906c05")) ||
 //                (nHeight ==  30240 && hash != uint256("0xe1c8c862ff342358384d4c22fa6ea5f669f3e1cdcf34111f8017371c3c0be1da")) ||
 //                (nHeight ==  57000 && hash != uint256("0xaa3ec60168a0200799e362e2b572ee01f3c3852030d07d036e0aa884ec61f203")) ||
 //                (nHeight == 112896 && hash != uint256("0x73f880e78a04dd6a31efc8abf7ca5db4e262c4ae130d559730d6ccb8808095bf")) ||
 //                (nHeight == 182000 && hash != uint256("0xd47b4a8fd282f635d66ce34ebbeb26ffd64c35b41f286646598abfd813cba6d9")) ||
 //                (nHeight == 193000 && hash != uint256("0x3b85e70ba7f5433049cfbcf0ae35ed869496dbedcd1c0fafadb0284ec81d7b58")))
-//            return false;
+            return false;
     return true;
 }
 
@@ -2736,8 +2736,8 @@ unsigned short GetDefaultPort()
     return fTestNet ? 18661 : 8661;
 }
 
-unsigned int pnSeed[] = { 0x58cea445, 0x2b562f4e, 0x291f20b2, 0 };
-const char *strDNSSeed[] = { "dnsseed.611.to" };
+unsigned int pnSeed[] = { 0x36fb2f06, 0x341d238c, 0xc1c00e01, 0 };
+const char *strDNSSeed[] = { "dnsseed.611.to", NULL };
 
 string GetDefaultDataDirSuffix() {
 #ifdef __WXMSW__

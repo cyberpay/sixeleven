@@ -489,6 +489,10 @@ extern std::deque<std::pair<int64, CInv> > vRelayExpiration;
 extern CCriticalSection cs_mapRelay;
 extern std::map<CInv, int64> mapAlreadyAskedFor;
 
+// Seed settings
+extern unsigned int pnSeed[];
+extern const char *strDNSSeed[];
+
 // Settings
 extern int fUseProxy;
 extern CAddress addrProxy;

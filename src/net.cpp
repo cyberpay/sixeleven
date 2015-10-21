@@ -1178,8 +1178,6 @@ void MapPort(bool fMapPort)
 
 
 
-extern const char *strDNSSeed[];
-
 void DNSAddressSeed()
 {
     int found = 0;
@@ -1188,7 +1186,7 @@ void DNSAddressSeed()
     {
         printf("Loading addresses from DNS seeds (could take a while)\n");
 
-        for (int seed_idx = 0; strDNSSeed[seed_idx] ; seed_idx++) {
+        for (unsigned int seed_idx = 0; strDNSSeed[seed_idx] != NULL; seed_idx++) {
             vector<CAddress> vaddr;
             if (Lookup(strDNSSeed[seed_idx], vaddr, NODE_NETWORK, -1, true))
             {
@@ -1208,9 +1206,6 @@ void DNSAddressSeed()
     printf("%d addresses found from DNS seeds\n", found);
 }
 
-
-
-extern unsigned int pnSeed[];
 
 
 void ThreadOpenConnections(void* parg)
