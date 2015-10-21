@@ -13,6 +13,7 @@ fi
 APP_NAME="611-Qt"
 VERSION="6.1.1"
 DMG_BACKGROUND_IMG="background.png"
+DMG_VOLUME_ICON="VolumeIcon.icns"
 
 # you should not need to change these
 APP_EXE="${APP_NAME}.app/Contents/MacOS/${APP_NAME}"
@@ -99,6 +100,7 @@ popd
 # add a background image
 mkdir /Volumes/"${VOL_NAME}"/.background
 cp "${DMG_BACKGROUND_IMG}" /Volumes/"${VOL_NAME}"/.background/
+cp "${DMG_VOLUME_ICON}" /Volumes/"${VOL_NAME}"/.VolumeIcon.icns
 
 # tell the Finder to resize the window, set the background,
 #  change the icon size, place the icons in the right position, etc.
