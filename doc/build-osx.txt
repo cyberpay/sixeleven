@@ -28,3 +28,9 @@ port install miniupnpc db48 automake autoconf cmake gcc5 icu
   (b) run the make (optional with -j4 for four processes)
      time make -j4
   (c) that's it: enjoy your self compiled 611-Qt (app)
+
+(5) in order to create an exportable dmg image without
+    requiring local libraries you need to deploy 611-Qt (app)
+    ./contrib/macdeploy/macdeployqtplus 611-Qt.app \
+       -add-qt-tr da,de,es,hu,ru,uk,zh_CN,zh_TW -translations-dir= \
+       -dmg -fancy ./contrib/macdeploy/fancy.plist -verbose 2
