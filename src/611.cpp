@@ -187,16 +187,18 @@ string stringFromVch(const vector<unsigned char> &vch) {
 int GetExpirationDepth(int nHeight) {
     if (nHeight < 18000)
         return 18000;
-    if (nHeight < 126000)
-        return nHeight - 18000;
+    if (nHeight < 108000)
+        return nHeight;
     return 108000;
 }
 
 // For display purposes, pass the name height.
 int GetDisplayExpirationDepth(int nHeight) {
-    if (nHeight < 12000)
-        return 12000;
-    return 36000;
+    if (nHeight < 18000)
+        return 18000;
+    if (nHeight < 108000)
+        return nHeight;
+    return 108000;
 }
 
 int64 GetNetworkFee(int nHeight)
